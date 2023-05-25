@@ -7,18 +7,29 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerPosition playerPosition;
     private Transform playerTransform;
-    private bool swipeLeft, swipeRight;
+    private bool swipeLeft, swipeRight, swipeUp, swipeDown;
     private float newXPosition;
     private float xPosition;
+    private float yPosition;
+
     [SerializeField] private float dodgeSpeed;
+
     private Animator playerAnimator;
     private int IdDodgeLeft = Animator.StringToHash("DodgeLeft");
     private int IdDodgeRight = Animator.StringToHash("DodgeRight");
+    private int IdJump = Animator.StringToHash("Jump");
+    private int IdFall = Animator.StringToHash("Fall");
+    private int IdLanding = Animator.StringToHash("Landing");
+
+    private CharacterController characterController;
+    private Vector3 motionPlayer;
+    [SerializeField] private float jumpPower = 7f;
 
     private void Awake()
     {
         playerTransform = GetComponent<Transform>();
         playerAnimator = GetComponent<Animator>();
+        characterController = GetComponent<CharacterController>();
     }
 
     void Start()
@@ -36,6 +47,8 @@ public class PlayerController : MonoBehaviour
     {
         swipeLeft = Input.GetKeyDown(KeyCode.LeftArrow);
         swipeRight = Input.GetKeyDown(KeyCode.RightArrow);
+        swipeUp = Input.GetKeyDown(KeyCode.UpArrow);
+        swipeDown = Input.GetKeyDown(KeyCode.DownArrow);
     }
 
     private void SetPlayerPosition()
@@ -45,12 +58,12 @@ public class PlayerController : MonoBehaviour
             if (playerPosition == PlayerPosition.Middle)
             {
                 UpdatePlayerXPosition(PlayerPosition.Left);
-                SetDodgePlayerAnimator(IdDodgeLeft);
+                SetPlayerAnimator(IdDodgeLeft, false);
             }
             else if (playerPosition == PlayerPosition.Right)
             {
                 UpdatePlayerXPosition(PlayerPosition.Middle);
-                SetDodgePlayerAnimator(IdDodgeLeft);
+                SetPlayerAnimator(IdDodgeLeft, false);
             }
         }
         else if (swipeRight)
@@ -58,16 +71,17 @@ public class PlayerController : MonoBehaviour
             if (playerPosition == PlayerPosition.Left)
             {
                 UpdatePlayerXPosition(PlayerPosition.Middle);
-                SetDodgePlayerAnimator(IdDodgeRight);
+                SetPlayerAnimator(IdDodgeRight, false);
             }
             else if (playerPosition == PlayerPosition.Middle)
             {
                 UpdatePlayerXPosition(PlayerPosition.Right);
-                SetDodgePlayerAnimator(IdDodgeRight);
+                SetPlayerAnimator(IdDodgeRight, false);
             }
         }
 
         MovePlayer();
+        Jump();
     }
 
     private void UpdatePlayerXPosition(PlayerPosition playerPos)
@@ -76,15 +90,42 @@ public class PlayerController : MonoBehaviour
         playerPosition = playerPos;
     }
 
-    private void SetDodgePlayerAnimator(int id)
+    private void SetPlayerAnimator(int id, bool isCrossFade, float fadeFixedTime = 0.1f)
     {
-        playerAnimator.Play(id);
+        if (isCrossFade)
+        {
+            playerAnimator.CrossFadeInFixedTime(id, fadeFixedTime);
+        }
+        else
+        {
+            playerAnimator.Play(id);
+        }
     }
     
-
     private void MovePlayer()
     {
         xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
-        playerTransform.position = new Vector3(xPosition, 0, 0);
+        motionPlayer = new Vector3(xPosition - playerTransform.position.x, yPosition * Time.deltaTime, 0);
+        characterController.Move(motionPlayer);
+    }
+
+    private void Jump()
+    {
+        if (characterController.isGrounded)
+        {
+            if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
+                SetPlayerAnimator(IdLanding, false);
+
+            if (swipeUp)
+            {
+                yPosition = jumpPower;
+                SetPlayerAnimator(IdJump, true, 1f);
+            }
+        }
+        else
+        {
+            yPosition -= jumpPower * 2 * Time.deltaTime;
+            SetPlayerAnimator(IdFall, true);
+        }
     }
 }

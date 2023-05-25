@@ -9,10 +9,16 @@ public class PlayerController : MonoBehaviour
     private Transform playerTransform;
     private bool swipeLeft, swipeRight;
     private float newXPosition;
+    private float xPosition;
+    [SerializeField] private float dodgeSpeed;
+    private Animator playerAnimator;
+    private int IdDodgeLeft = Animator.StringToHash("DodgeLeft");
+    private int IdDodgeRight = Animator.StringToHash("DodgeRight");
 
     private void Awake()
     {
         playerTransform = GetComponent<Transform>();
+        playerAnimator = GetComponent<Animator>();
     }
 
     void Start()
@@ -39,10 +45,12 @@ public class PlayerController : MonoBehaviour
             if (playerPosition == PlayerPosition.Middle)
             {
                 UpdatePlayerXPosition(PlayerPosition.Left);
+                SetDodgePlayerAnimator(IdDodgeLeft);
             }
             else if (playerPosition == PlayerPosition.Right)
             {
                 UpdatePlayerXPosition(PlayerPosition.Middle);
+                SetDodgePlayerAnimator(IdDodgeLeft);
             }
         }
         else if (swipeRight)
@@ -50,10 +58,12 @@ public class PlayerController : MonoBehaviour
             if (playerPosition == PlayerPosition.Left)
             {
                 UpdatePlayerXPosition(PlayerPosition.Middle);
+                SetDodgePlayerAnimator(IdDodgeRight);
             }
             else if (playerPosition == PlayerPosition.Middle)
             {
                 UpdatePlayerXPosition(PlayerPosition.Right);
+                SetDodgePlayerAnimator(IdDodgeRight);
             }
         }
 
@@ -66,8 +76,15 @@ public class PlayerController : MonoBehaviour
         playerPosition = playerPos;
     }
 
+    private void SetDodgePlayerAnimator(int id)
+    {
+        playerAnimator.Play(id);
+    }
+    
+
     private void MovePlayer()
     {
-        playerTransform.position = new Vector3(newXPosition, 0, 0);
+        xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
+        playerTransform.position = new Vector3(xPosition, 0, 0);
     }
 }

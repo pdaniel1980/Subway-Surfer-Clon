@@ -127,6 +127,8 @@ public class PlayerController : MonoBehaviour
     {
         if (characterController.isGrounded)
         {
+            isJumping = false;
+
             if (playerAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
                 SetPlayerAnimator(IdLanding, false);
 
@@ -139,7 +141,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            isJumping = false;
             yPosition -= jumpPower * 2 * Time.deltaTime;
             if (characterController.velocity.y <= 0)
                 SetPlayerAnimator(IdFall, true);

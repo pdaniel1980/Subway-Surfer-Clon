@@ -1517,7 +1517,7 @@ GameObject:
   - component: {fileID: 4281744248104867547}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1543,7 +1543,7 @@ Transform:
   - {fileID: 8546721540930807049}
   - {fileID: 6789070163801122375}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4281744248104867545
 Animator:
@@ -1603,7 +1603,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34dcbf064d5840afa6860970bf9f862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dodgeSpeed: 8
+  forwardSpeed: 10
+  dodgeSpeed: 10
+  jumpPower: 15
 --- !u!1 &7371162530973715977
 GameObject:
   m_ObjectHideFlags: 0

@@ -30,22 +30,23 @@ public class PlayerController : MonoBehaviour
     private int IdLanding = Animator.StringToHash("Landing");
     private int IdRoll = Animator.StringToHash("Roll");
 
-    private CharacterController selfCharacterController;
+    private CharacterController _selfCharacterController;
+    public CharacterController SelfCharacterController { get => _selfCharacterController; set => _selfCharacterController = value; }
     private Vector3 motion;
 
     private void Awake()
     {
         selfTransform = GetComponent<Transform>();
         selfAnimator = GetComponent<Animator>();
-        selfCharacterController = GetComponent<CharacterController>();
+        _selfCharacterController = GetComponent<CharacterController>();
     }
 
     void Start()
     {
         position = Side.Middle;
         yPosition = -7f;
-        standCharacterCenter = selfCharacterController.center;
-        standCharacterHeight = selfCharacterController.height;
+        standCharacterCenter = _selfCharacterController.center;
+        standCharacterHeight = _selfCharacterController.height;
         rollCharacterCenter = new Vector3(0, 0.2f, 0);
         rollCharacterHeight = 0.4f;
     }
@@ -119,12 +120,12 @@ public class PlayerController : MonoBehaviour
     {
         xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
         motion = new Vector3(xPosition - selfTransform.position.x, yPosition * Time.deltaTime, forwardSpeed * Time.deltaTime);
-        selfCharacterController.Move(motion);
+        _selfCharacterController.Move(motion);
     }
 
     private void Jump()
     {
-        if (selfCharacterController.isGrounded)
+        if (_selfCharacterController.isGrounded)
         {
             isJumping = false;
 
@@ -141,14 +142,14 @@ public class PlayerController : MonoBehaviour
         else
         {
             yPosition -= jumpPower * 2 * Time.deltaTime;
-            if (selfCharacterController.velocity.y <= 0)
+            if (_selfCharacterController.velocity.y <= 0)
                 SetPlayerAnimator(IdFall, true);
         }
     }
 
     private void Roll()
     {
-        if (selfCharacterController.isGrounded)
+        if (_selfCharacterController.isGrounded)
         {
             rollTimer -= Time.deltaTime;
 
@@ -156,16 +157,16 @@ public class PlayerController : MonoBehaviour
             {
                 isRolling = false;
                 rollTimer = 0;
-                selfCharacterController.center = standCharacterCenter;
-                selfCharacterController.height = standCharacterHeight;
+                _selfCharacterController.center = standCharacterCenter;
+                _selfCharacterController.height = standCharacterHeight;
             }
 
             if (swipeDown && !isJumping)
             {
                 isRolling = true;
                 rollTimer = 0.5f;
-                selfCharacterController.center = rollCharacterCenter;
-                selfCharacterController.height = rollCharacterHeight;
+                _selfCharacterController.center = rollCharacterCenter;
+                _selfCharacterController.height = rollCharacterHeight;
                 SetPlayerAnimator(IdRoll, true);
             }
         }

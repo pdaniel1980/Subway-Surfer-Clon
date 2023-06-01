@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public enum CollisionX { None, Left, Middle, Right }
-public enum CollisionY { None, Up, Middle, Down}
+public enum CollisionY { None, Up, Middle, Down, LowDown}
 public enum CollisionZ { None, Forward, Middle, Backward }
 
 public class PlayerCollision : MonoBehaviour
@@ -11,10 +11,12 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private CollisionZ collisionZ;
 
     private CharacterController characterController;
+    private PlayerController playerController;
 
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+        playerController = GetComponent<PlayerController>();
     }
 
     public void OnCharacterCollision(Collider collider)
@@ -22,6 +24,22 @@ public class PlayerCollision : MonoBehaviour
         collisionX = GetCollisionX(collider);
         collisionY = GetCollisionY(collider);
         collisionZ = GetCollisionZ(collider);
+        SetAnimatorCollision();
+    }
+
+    private void SetAnimatorCollision()
+    {
+        if (collisionZ == CollisionZ.Backward && collisionX == CollisionX.Middle)
+        {
+            if (collisionY == CollisionY.LowDown)
+            {
+                playerController.SetPlayerAnimator(playerController.IdStumbleLow, false);
+            }
+            else if (collisionY == CollisionY.Down)
+            {
+                playerController.SetPlayerAnimator(playerController.IdDeathLower, false);
+            }
+        }
     }
 
     private CollisionX GetCollisionX(Collider collider)
@@ -63,6 +81,10 @@ public class PlayerCollision : MonoBehaviour
         if (average > colliderBounds.size.x - 0.33f)
         {
             colY = CollisionY.Up;
+        }
+        else if (average < 0.16f)
+        {
+            colY = CollisionY.LowDown;
         }
         else if (average < 0.33f)
         {

@@ -29,9 +29,34 @@ public class PlayerController : MonoBehaviour
     private int IdFall = Animator.StringToHash("Fall");
     private int IdLanding = Animator.StringToHash("Landing");
     private int IdRoll = Animator.StringToHash("Roll");
+    private int _IdStumbleLow = Animator.StringToHash("StumbleLow");
+    private int _IdStumbleCornerLeft = Animator.StringToHash("StumbleCornerLeft");
+    private int _IdStumbleCornerRight = Animator.StringToHash("StumbleCornerRight");
+    private int _IdStumbleFall = Animator.StringToHash("StumbleFall");
+    private int _IdStumbleOffLeft = Animator.StringToHash("StumbleOffLeft");
+    private int _IdStumbleOffRight = Animator.StringToHash("StumbleOffRight");
+    private int _IdStumbleSideLeft = Animator.StringToHash("StumbleSideLeft");
+    private int _IdStumbleSideRight = Animator.StringToHash("StumbleSideRight");
+    private int _IdDeathBounce = Animator.StringToHash("DeathBounce");
+    private int _IdDeathLower = Animator.StringToHash("DeathLower");
+    private int _IdDeathMovingTrain = Animator.StringToHash("DeathMovingTrain");
+    private int _IdDeathUpper = Animator.StringToHash("DeathUpper");
+    public int IdStumbleLow { get => _IdStumbleLow; set => _IdStumbleLow = value; }
+    public int IdStumbleCornerLeft { get => _IdStumbleCornerLeft; set => _IdStumbleCornerLeft = value; }
+    public int IdStumbleCornerRight { get => _IdStumbleCornerRight; set => _IdStumbleCornerRight = value; }
+    public int IdStumbleFall { get => _IdStumbleFall; set => _IdStumbleFall = value; }
+    public int IdStumbleOffLeft { get => _IdStumbleOffLeft; set => _IdStumbleOffLeft = value; }
+    public int IdStumbleOffRight { get => _IdStumbleOffRight; set => _IdStumbleOffRight = value; }
+    public int IdStumbleSideLeft { get => _IdStumbleSideLeft; set => _IdStumbleSideLeft = value; }
+    public int IdStumbleSideRight { get => _IdStumbleSideRight; set => _IdStumbleSideRight = value; }
+    public int IdDeathBounce { get => _IdDeathBounce; set => _IdDeathBounce = value; }
+    public int IdDeathLower { get => _IdDeathLower; set => _IdDeathLower = value; }
+    public int IdDeathMovingTrain { get => _IdDeathMovingTrain; set => _IdDeathMovingTrain = value; }
+    public int IdDeathUpper { get => _IdDeathUpper; set => _IdDeathUpper = value; }
 
     private CharacterController _selfCharacterController;
     public CharacterController SelfCharacterController { get => _selfCharacterController; set => _selfCharacterController = value; }
+
     private Vector3 motion;
 
     private void Awake()
@@ -104,7 +129,7 @@ public class PlayerController : MonoBehaviour
         position = playerPos;
     }
 
-    private void SetPlayerAnimator(int id, bool isCrossFade, float fadeFixedTime = 0.1f)
+    public void SetPlayerAnimator(int id, bool isCrossFade, float fadeFixedTime = 0.1f)
     {
         if (isCrossFade)
         {

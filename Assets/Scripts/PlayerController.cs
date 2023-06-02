@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum Side { Left = -2, Middle = 0, Right = 2 }
@@ -12,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Transform selfTransform;
     private bool swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isJumping;
-    private bool isRolling;
+    private bool _isRolling;
     private float rollTimer;
     private float newXPosition;
     private float xPosition;
@@ -54,8 +55,10 @@ public class PlayerController : MonoBehaviour
     public int IdDeathMovingTrain { get => _IdDeathMovingTrain; set => _IdDeathMovingTrain = value; }
     public int IdDeathUpper { get => _IdDeathUpper; set => _IdDeathUpper = value; }
 
+    private PlayerCollision playerCollision;
     private CharacterController _selfCharacterController;
     public CharacterController SelfCharacterController { get => _selfCharacterController; set => _selfCharacterController = value; }
+    public bool IsRolling { get => _isRolling; set => _isRolling = value; }
 
     private Vector3 motion;
 
@@ -64,6 +67,7 @@ public class PlayerController : MonoBehaviour
         selfTransform = GetComponent<Transform>();
         selfAnimator = GetComponent<Animator>();
         _selfCharacterController = GetComponent<CharacterController>();
+        playerCollision = GetComponent<PlayerCollision>();
     }
 
     void Start()
@@ -95,7 +99,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetPlayerPosition()
     {
-        if (swipeLeft && !isRolling)
+        if (swipeLeft && !_isRolling)
         {
             if (position == Side.Middle)
             {
@@ -108,7 +112,7 @@ public class PlayerController : MonoBehaviour
                 SetPlayerAnimator(IdDodgeLeft, false);
             }
         }
-        else if (swipeRight && !isRolling)
+        else if (swipeRight && !_isRolling)
         {
             if (position == Side.Left)
             {
@@ -139,8 +143,17 @@ public class PlayerController : MonoBehaviour
         {
             selfAnimator.Play(id);
         }
+
+        ResetPlayerCollisions();
     }
-    
+
+    private void ResetPlayerCollisions()
+    {
+        playerCollision.CollisionX = CollisionX.None;
+        playerCollision.CollisionY = CollisionY.None;
+        playerCollision.CollisionZ = CollisionZ.None;
+    }
+
     private void MovePlayer()
     {
         xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
@@ -157,7 +170,7 @@ public class PlayerController : MonoBehaviour
             if (selfAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
                 SetPlayerAnimator(IdLanding, false);
 
-            if (swipeUp && !isRolling)
+            if (swipeUp && !_isRolling)
             {
                 isJumping = true;
                 yPosition = jumpPower;
@@ -180,7 +193,7 @@ public class PlayerController : MonoBehaviour
 
             if (rollTimer <= 0)
             {
-                isRolling = false;
+                _isRolling = false;
                 rollTimer = 0;
                 _selfCharacterController.center = standCharacterCenter;
                 _selfCharacterController.height = standCharacterHeight;
@@ -188,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
             if (swipeDown && !isJumping)
             {
-                isRolling = true;
+                _isRolling = true;
                 rollTimer = 0.5f;
                 _selfCharacterController.center = rollCharacterCenter;
                 _selfCharacterController.height = rollCharacterHeight;

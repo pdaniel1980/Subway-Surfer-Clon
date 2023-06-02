@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public enum CollisionX { None, Left, Middle, Right }
@@ -6,12 +7,16 @@ public enum CollisionZ { None, Forward, Middle, Backward }
 
 public class PlayerCollision : MonoBehaviour
 {
-    [SerializeField] private CollisionX collisionX;
-    [SerializeField] private CollisionY collisionY;
-    [SerializeField] private CollisionZ collisionZ;
+    private CollisionX _collisionX;
+    private CollisionY _collisionY;
+    private CollisionZ _collisionZ;
 
     private CharacterController characterController;
     private PlayerController playerController;
+
+    public CollisionX CollisionX { get => _collisionX; set => _collisionX = value; }
+    public CollisionY CollisionY { get => _collisionY; set => _collisionY = value; }
+    public CollisionZ CollisionZ { get => _collisionZ; set => _collisionZ = value; }
 
     private void Awake()
     {
@@ -21,24 +26,67 @@ public class PlayerCollision : MonoBehaviour
 
     public void OnCharacterCollision(Collider collider)
     {
-        collisionX = GetCollisionX(collider);
-        collisionY = GetCollisionY(collider);
-        collisionZ = GetCollisionZ(collider);
-        SetAnimatorCollision();
+        _collisionX = GetCollisionX(collider);
+        _collisionY = GetCollisionY(collider);
+        _collisionZ = GetCollisionZ(collider);
+        SetAnimatorCollision(collider);
     }
 
-    private void SetAnimatorCollision()
+    private void SetAnimatorCollision(Collider collider)
     {
-        if (collisionZ == CollisionZ.Backward && collisionX == CollisionX.Middle)
+        if (_collisionZ == CollisionZ.Backward && _collisionX == CollisionX.Middle)
         {
-            if (collisionY == CollisionY.LowDown)
+            SetAnimatorCollisionZBackward(collider);
+        }
+        else if (_collisionZ == CollisionZ.Middle)
+        {
+            if (_collisionX == CollisionX.Left)
             {
-                playerController.SetPlayerAnimator(playerController.IdStumbleLow, false);
+                playerController.SetPlayerAnimator(playerController.IdStumbleSideLeft, false);
             }
-            else if (collisionY == CollisionY.Down)
+            else if (_collisionX == CollisionX.Right)
             {
-                playerController.SetPlayerAnimator(playerController.IdDeathLower, false);
+                playerController.SetPlayerAnimator(playerController.IdStumbleSideRight, false);
             }
+        }
+        else
+        {
+            if (_collisionX == CollisionX.Left)
+            {
+                playerController.SetPlayerAnimator(playerController.IdStumbleCornerLeft, false);
+            }
+            else if (_collisionX == CollisionX.Right)
+            {
+                playerController.SetPlayerAnimator(playerController.IdStumbleCornerRight, false);
+            }
+        }
+    }
+
+    private void SetAnimatorCollisionZBackward(Collider collider)
+    {
+        if (_collisionY == CollisionY.LowDown)
+        {
+            collider.enabled = false;
+            playerController.SetPlayerAnimator(playerController.IdStumbleLow, false);
+        }
+        else if (_collisionY == CollisionY.Down)
+        {
+            playerController.SetPlayerAnimator(playerController.IdDeathLower, false);
+        }
+        else if (_collisionY == CollisionY.Middle)
+        {
+            if (collider.CompareTag("MovingTrain"))
+            {
+                playerController.SetPlayerAnimator(playerController.IdDeathMovingTrain, false);
+            }
+            else
+            {
+                playerController.SetPlayerAnimator(playerController.IdDeathBounce, false);
+            }
+        }
+        else if (_collisionY == CollisionY.Up && !playerController.IsRolling)
+        {
+            playerController.SetPlayerAnimator(playerController.IdDeathLower, false);
         }
     }
 

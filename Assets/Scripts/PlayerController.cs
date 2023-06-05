@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 public enum Side { Left = -2, Middle = 0, Right = 2 }
+public enum LayerAnimator { Base, StumbleCorner }
 
 public class PlayerController : MonoBehaviour
 {
@@ -135,6 +136,8 @@ public class PlayerController : MonoBehaviour
 
     public void SetPlayerAnimator(int id, bool isCrossFade, float fadeFixedTime = 0.1f)
     {
+        selfAnimator.SetLayerWeight((int) LayerAnimator.Base, 1);
+
         if (isCrossFade)
         {
             selfAnimator.CrossFadeInFixedTime(id, fadeFixedTime);
@@ -144,6 +147,13 @@ public class PlayerController : MonoBehaviour
             selfAnimator.Play(id);
         }
 
+        ResetPlayerCollisions();
+    }
+
+    public void SetPlayerAnimatorWithLayer(int id)
+    {
+        selfAnimator.SetLayerWeight((int) LayerAnimator.StumbleCorner, 1);
+        selfAnimator.Play(id);
         ResetPlayerCollisions();
     }
 

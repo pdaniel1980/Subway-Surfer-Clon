@@ -11,12 +11,17 @@ public class PlayerCollision : MonoBehaviour
     private CollisionY _collisionY;
     private CollisionZ _collisionZ;
 
+    private bool _sideBounce = false;
+
+
     private CharacterController characterController;
     private PlayerController playerController;
 
     public CollisionX CollisionX { get => _collisionX; set => _collisionX = value; }
     public CollisionY CollisionY { get => _collisionY; set => _collisionY = value; }
     public CollisionZ CollisionZ { get => _collisionZ; set => _collisionZ = value; }
+
+    public bool SideBounce { get => _sideBounce; set => _sideBounce = value; }
 
     private void Awake()
     {
@@ -43,10 +48,12 @@ public class PlayerCollision : MonoBehaviour
             if (_collisionX == CollisionX.Left)
             {
                 playerController.SetPlayerAnimator(playerController.IdStumbleSideLeft, false);
+                _sideBounce = true;
             }
             else if (_collisionX == CollisionX.Right)
             {
                 playerController.SetPlayerAnimator(playerController.IdStumbleSideRight, false);
+                _sideBounce = true;
             }
         }
         else

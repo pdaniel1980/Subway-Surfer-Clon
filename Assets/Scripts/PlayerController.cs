@@ -10,7 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float forwardSpeed = 10f;
     [SerializeField] private float dodgeSpeed = 8f;
     [SerializeField] private float jumpPower = 10f;
-    private Side position;
+    [SerializeField] private Side position;
+    [SerializeField] private Side previuosPosition;
     private Transform selfTransform;
     private bool swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isJumping;
@@ -86,6 +87,7 @@ public class PlayerController : MonoBehaviour
         GetSwipe();
         SetPlayerPosition();
         MovePlayer();
+        BlouncePlayer();
         Jump();
         Roll();
     }
@@ -102,6 +104,8 @@ public class PlayerController : MonoBehaviour
     {
         if (swipeLeft && !_isRolling)
         {
+            previuosPosition = position;
+
             if (position == Side.Middle)
             {
                 UpdatePlayerXPosition(Side.Left);
@@ -115,6 +119,8 @@ public class PlayerController : MonoBehaviour
         }
         else if (swipeRight && !_isRolling)
         {
+            previuosPosition = position;
+
             if (position == Side.Left)
             {
                 UpdatePlayerXPosition(Side.Middle);
@@ -169,6 +175,16 @@ public class PlayerController : MonoBehaviour
         xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
         motion = new Vector3(xPosition - selfTransform.position.x, yPosition * Time.deltaTime, forwardSpeed * Time.deltaTime);
         _selfCharacterController.Move(motion);
+    }
+
+    private void BlouncePlayer()
+    {
+        if (playerCollision.SideBounce)
+        {
+            UpdatePlayerXPosition(previuosPosition);
+            MovePlayer();
+            playerCollision.SideBounce = false;
+        }
     }
 
     private void Jump()

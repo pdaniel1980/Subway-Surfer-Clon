@@ -64,6 +64,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 motion;
 
+    private GameManager gameManager;
+
     private void Awake()
     {
         selfTransform = GetComponent<Transform>();
@@ -80,16 +82,20 @@ public class PlayerController : MonoBehaviour
         standCharacterHeight = _selfCharacterController.height;
         rollCharacterCenter = new Vector3(0, 0.2f, 0);
         rollCharacterHeight = 0.4f;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     
     void Update()
     {
-        GetSwipe();
-        SetPlayerPosition();
-        MovePlayer();
-        BlouncePlayer();
-        Jump();
-        Roll();
+        if (!gameManager.GameOver && gameManager.Go)
+        {
+            GetSwipe();
+            SetPlayerPosition();
+            MovePlayer();
+            BlouncePlayer();
+            Jump();
+            Roll();
+        }
     }
 
     private void GetSwipe()

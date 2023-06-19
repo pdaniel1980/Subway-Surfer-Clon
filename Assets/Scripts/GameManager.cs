@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private float timeToStart = 3.0f;
+    private PlayerController playerController;
+
     private bool _gameOver = false;
     private bool _go = false;
 
@@ -13,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        playerController.SetActiveAnimator(false);
         _ = StartCoroutine(CountDownCourutine());
     }
 
@@ -31,12 +35,16 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
+        playerController.SetActiveAnimator(true);
+        _gameOver = false;
         _go = true;
     }
 
     public void EndGame()
     {
-        Time.timeScale = 0;
+        _gameOver = true;
+        _go = false;
+        //Time.timeScale = 0;
     }
 
     private void OnGUI()

@@ -11,7 +11,7 @@ public class PlayerCollision : MonoBehaviour
     private CollisionY _collisionY;
     private CollisionZ _collisionZ;
 
-    private bool _sideBounce = false;
+    private bool _sideCollision = false;
 
 
     private CharacterController characterController;
@@ -21,7 +21,7 @@ public class PlayerCollision : MonoBehaviour
     public CollisionY CollisionY { get => _collisionY; set => _collisionY = value; }
     public CollisionZ CollisionZ { get => _collisionZ; set => _collisionZ = value; }
 
-    public bool SideBounce { get => _sideBounce; set => _sideBounce = value; }
+    public bool SideCollision { get => _sideCollision; set => _sideCollision = value; }
 
     private void Awake()
     {
@@ -48,12 +48,12 @@ public class PlayerCollision : MonoBehaviour
             if (_collisionX == CollisionX.Left)
             {
                 playerController.SetPlayerAnimator(playerController.IdStumbleSideLeft, false);
-                _sideBounce = true;
+                _sideCollision = true;
             }
             else if (_collisionX == CollisionX.Right)
             {
                 playerController.SetPlayerAnimator(playerController.IdStumbleSideRight, false);
-                _sideBounce = true;
+                _sideCollision = true;
             }
         }
         else
@@ -79,21 +79,25 @@ public class PlayerCollision : MonoBehaviour
         else if (_collisionY == CollisionY.Down)
         {
             playerController.SetPlayerAnimator(playerController.IdDeathLower, false);
+            playerController.GameManager.EndGame();
         }
         else if (_collisionY == CollisionY.Middle)
         {
             if (collider.CompareTag("MovingTrain"))
             {
                 playerController.SetPlayerAnimator(playerController.IdDeathMovingTrain, false);
+                playerController.GameManager.EndGame();
             }
             else
             {
                 playerController.SetPlayerAnimator(playerController.IdDeathBounce, false);
+                playerController.GameManager.EndGame();
             }
         }
         else if (_collisionY == CollisionY.Up && !playerController.IsRolling)
         {
-            playerController.SetPlayerAnimator(playerController.IdDeathLower, false);
+            playerController.SetPlayerAnimator(playerController.IdDeathUpper, false);
+            playerController.GameManager.EndGame();
         }
     }
 
@@ -133,7 +137,7 @@ public class PlayerCollision : MonoBehaviour
 
         CollisionY colY;
 
-        if (average > colliderBounds.size.x - 0.33f)
+        if (average > colliderBounds.size.y - 0.33f)
         {
             colY = CollisionY.Up;
         }

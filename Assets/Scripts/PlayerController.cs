@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public enum Side { Left = -2, Middle = 0, Right = 2 }
@@ -64,7 +66,8 @@ public class PlayerController : MonoBehaviour
 
     private Vector3 motion;
 
-    private GameManager gameManager;
+    private GameManager _gameManager;
+    public GameManager GameManager { get => _gameManager; set => _gameManager = value; }
 
     private void Awake()
     {
@@ -82,12 +85,12 @@ public class PlayerController : MonoBehaviour
         standCharacterHeight = _selfCharacterController.height;
         rollCharacterCenter = new Vector3(0, 0.2f, 0);
         rollCharacterHeight = 0.4f;
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     
     void Update()
     {
-        if (!gameManager.GameOver && gameManager.Go)
+        if (!_gameManager.GameOver && _gameManager.Go)
         {
             GetSwipe();
             SetPlayerPosition();
@@ -96,6 +99,16 @@ public class PlayerController : MonoBehaviour
             Jump();
             Roll();
         }
+        else if (_gameManager.GameOver)
+        {
+            Fall();
+            MovePlayer();
+        }
+    }
+
+    public void SetActiveAnimator(bool activate)
+    {
+        selfAnimator.enabled = activate;
     }
 
     private void GetSwipe()
@@ -185,12 +198,19 @@ public class PlayerController : MonoBehaviour
 
     private void BlouncePlayer()
     {
-        if (playerCollision.SideBounce)
+        if (playerCollision.SideCollision)
         {
-            UpdatePlayerXPosition(previuosPosition);
-            MovePlayer();
-            playerCollision.SideBounce = false;
+            _ = StartCoroutine(WaitToBackPosition(0.3f));
         }
+    }
+
+    IEnumerator WaitToBackPosition(float timeToBack)
+    {
+        yield return new WaitForSeconds(timeToBack);
+
+        UpdatePlayerXPosition(previuosPosition);
+        MovePlayer();
+        playerCollision.SideCollision = false;
     }
 
     private void Jump()
@@ -211,10 +231,16 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            yPosition -= jumpPower * 2 * Time.deltaTime;
-            if (_selfCharacterController.velocity.y <= 0)
-                SetPlayerAnimator(IdFall, true);
+            Fall();
         }
+    }
+
+    private void Fall()
+    {
+        yPosition -= jumpPower * 2 * Time.deltaTime;
+
+        if (_selfCharacterController.velocity.y <= 0 && !_gameManager.GameOver)
+            SetPlayerAnimator(IdFall, true);
     }
 
     private void Roll()

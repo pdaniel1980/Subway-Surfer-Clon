@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a090cca3a2d54292a10a0600f388ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToStart: 3
+  timeToStart: 1
 --- !u!4 &11536380
 Transform:
   m_ObjectHideFlags: 0
@@ -629,11 +629,11 @@ Transform:
   m_Children:
   - {fileID: 1905795106}
   - {fileID: 44159424}
-  - {fileID: 546203446}
   - {fileID: 1404084762}
   - {fileID: 646552965}
   - {fileID: 1427073437}
   - {fileID: 232768089}
+  - {fileID: 546203446}
   - {fileID: 719561184}
   - {fileID: 227105113}
   m_Father: {fileID: 0}
@@ -683,7 +683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5286948162216373951, guid: e9d33d0f6f26148a8bada507c2017c60, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 42.3
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5286948162216373951, guid: e9d33d0f6f26148a8bada507c2017c60, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1071,7 +1071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2957962471796267882, guid: bde9d9c1d6a00447abf54b117119dde1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 2957962471796267882, guid: bde9d9c1d6a00447abf54b117119dde1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2497,7 +2497,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4281744248104867547, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: jumpPower
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4281744248104867547, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: forwardSpeed

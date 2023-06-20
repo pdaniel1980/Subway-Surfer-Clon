@@ -44,7 +44,6 @@ public class GameManager : MonoBehaviour
     {
         _gameOver = true;
         _go = false;
-        //Time.timeScale = 0;
     }
 
     private void OnGUI()

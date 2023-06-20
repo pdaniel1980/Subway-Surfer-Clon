@@ -101,6 +101,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (_gameManager.GameOver)
         {
+            forwardSpeed = 0f;
             Fall();
             MovePlayer();
         }

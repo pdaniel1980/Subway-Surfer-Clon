@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5838066765916956614}
   m_Layer: 0
   m_Name: road
-  m_TagString: Untagged
+  m_TagString: Road
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5838066765916956612
 MeshFilter:
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6.489397, y: 0.5641145, z: 18.006783}
-  m_Center: {x: 0.028511524, y: -0.28788123, z: 9.001513}
+  m_Size: {x: 6.489397, y: 0.5641145, z: 18.155027}
+  m_Center: {x: 0.028511524, y: -0.28788123, z: 9.0015135}

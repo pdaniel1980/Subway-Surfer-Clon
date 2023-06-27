@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+public class SceneController : MonoBehaviour
 {
     private Transform playerTransform;
     [SerializeField] private float limit = 2086f;

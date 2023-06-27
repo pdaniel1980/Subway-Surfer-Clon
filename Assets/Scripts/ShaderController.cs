@@ -7,54 +7,96 @@ public class ShaderController : MonoBehaviour
     [SerializeField, Range(-1, 1)] private float curveY;
     [SerializeField] private Material[] materials;
     [SerializeField] private float waitTimeForCurveAgain = 3.0f;
-    [SerializeField] private float timeToComplete = 2.0f;
+    [SerializeField] private float timeToCurve = 2.0f;
+    private float currentTime;
 
-    [SerializeField] private int curveXRandom, curveYRandom;
-    private float curveXTarget, curveYTarget;
+    [SerializeField] private int curveXTarget, curveYTarget;
+    private float curveXCurrent, curveYCurrent;
     private GameManager gameManager;
     [SerializeField] private bool autoCurve = true;
     private int[] curvePosibleValues = { -1, 1 };
+
+    [SerializeField] private bool allowCurving = true;
+
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        // Inicializamos en x:0, y:0 la curvatura del nivel
-        CurveLevel(x: -1, y: 0);
+        curveXTarget = curvePosibleValues[Random.Range(0, 2)];
+        curveYTarget = curvePosibleValues[Random.Range(0, 2)];
 
-        StartCoroutine(CurveCoroutine());
+        // Inicializamos en x:0, y:0 la curvatura del nivel
+        curveX = 0;
+        curveY = 0;
+        CurveLevel(x: curveX, y: curveY);
     }
 
     private void Update()
     {
-        CurveLevel(curveXTarget, curveYTarget);
+        if (!gameManager.GameOver && gameManager.Go && autoCurve)
+        {
+            Curve();
+        }
     }
 
-    IEnumerator CurveCoroutine()
+    private void Curve()
+    {
+
+        if (allowCurving)
+        {
+            currentTime += Time.deltaTime;
+
+            float t = Mathf.Clamp01(currentTime / timeToCurve);
+
+            curveXCurrent = Mathf.Lerp(curveX, curveXTarget, t);
+            curveYCurrent = Mathf.Lerp(curveY, curveYTarget, t);
+
+            CurveLevel(curveXCurrent, curveYCurrent);
+
+            if (t >= 1f)
+            {
+                currentTime = 0f;
+                curveX = curveXTarget;
+                curveY = curveYTarget;
+                curveXTarget = curvePosibleValues[Random.Range(0, 2)];
+                curveYTarget = curvePosibleValues[Random.Range(0, 2)];
+                _ = StartCoroutine(Sleep());
+            }
+        }
+    }
+
+    IEnumerator Sleep()
+    {
+        allowCurving = false;
+        Debug.Log("curveX: " + curveX + " CurveRandom: " + curveXTarget + " Current Time: " + currentTime);
+        yield return new WaitForSeconds(waitTimeForCurveAgain);
+        allowCurving = true;
+    }
+
+    /*IEnumerator CurveCoroutine()
     {
         for (;;)
         {
             if (!gameManager.GameOver && gameManager.Go && autoCurve)
             {
-                curveXRandom = curvePosibleValues[Random.Range(0, 2)];
-                curveYRandom = curvePosibleValues[Random.Range(0, 2)];
+                curveX = curvePosibleValues[Random.Range(0, 2)];
+                curveY = curvePosibleValues[Random.Range(0, 2)];
 
-                Debug.Log("CurveXRandom: " + curveXRandom + " CurveYRandom: " + curveYRandom);
+                //Debug.Log("CurveXRandom: " + curveXRandom + " CurveYRandom: " + curveYRandom);
 
                 float timeElapsed = 0;
                 float t;
                 
-                while (timeElapsed < timeToComplete)
+                while (timeElapsed < timeToCurve)
                 {
-                    t = Time.deltaTime / timeToComplete;
+                    t = Time.deltaTime / timeToCurve;
                     //curveXTarget = Mathf.MoveTowards(curveX, curveXRandom, t);
-                    Debug.Log("curveXTarget: " + curveXTarget + " timeElapsed: " + timeElapsed + " t: " + t);
-                    curveXTarget = Mathf.MoveTowards(curveXTarget, curveXRandom, t);
-                    curveYTarget = Mathf.MoveTowards(curveYTarget, curveYRandom, t);
+                    //Debug.Log("curveXTarget: " + curveXTarget + " timeElapsed: " + timeElapsed + " t: " + t);
+                    curveXTarget = Mathf.MoveTowards(curveXTarget, curveX, t);
+                    curveYTarget = Mathf.MoveTowards(curveYTarget, curveY, t);
 
                     timeElapsed += Time.deltaTime;
-
-                    
 
                     yield return null;
                 }
@@ -68,7 +110,7 @@ public class ShaderController : MonoBehaviour
                 yield return null;
             }
         }
-    }
+    }*/
 
     private void CurveLevel(float x, float y)
     {
@@ -77,9 +119,6 @@ public class ShaderController : MonoBehaviour
             m.SetFloat(Shader.PropertyToID("_Curve_X"), x);
             m.SetFloat(Shader.PropertyToID("_Curve_Y"), y);
         }
-
-        curveX = x;
-        curveY = y;
     }
 
 }

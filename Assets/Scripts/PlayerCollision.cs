@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public enum CollisionX { None, Left, Middle, Right }

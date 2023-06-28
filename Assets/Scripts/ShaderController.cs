@@ -69,48 +69,9 @@ public class ShaderController : MonoBehaviour
     IEnumerator Sleep()
     {
         allowCurving = false;
-        Debug.Log("curveX: " + curveX + " CurveRandom: " + curveXTarget + " Current Time: " + currentTime);
         yield return new WaitForSeconds(waitTimeForCurveAgain);
         allowCurving = true;
     }
-
-    /*IEnumerator CurveCoroutine()
-    {
-        for (;;)
-        {
-            if (!gameManager.GameOver && gameManager.Go && autoCurve)
-            {
-                curveX = curvePosibleValues[Random.Range(0, 2)];
-                curveY = curvePosibleValues[Random.Range(0, 2)];
-
-                //Debug.Log("CurveXRandom: " + curveXRandom + " CurveYRandom: " + curveYRandom);
-
-                float timeElapsed = 0;
-                float t;
-                
-                while (timeElapsed < timeToCurve)
-                {
-                    t = Time.deltaTime / timeToCurve;
-                    //curveXTarget = Mathf.MoveTowards(curveX, curveXRandom, t);
-                    //Debug.Log("curveXTarget: " + curveXTarget + " timeElapsed: " + timeElapsed + " t: " + t);
-                    curveXTarget = Mathf.MoveTowards(curveXTarget, curveX, t);
-                    curveYTarget = Mathf.MoveTowards(curveYTarget, curveY, t);
-
-                    timeElapsed += Time.deltaTime;
-
-                    yield return null;
-                }
-
-                //Debug.Log("Terminamos");
-                yield return new WaitForSeconds(waitTimeForCurveAgain);
-                //Debug.Log("Despues de " + waitTimeForCurveAgain + " segundos");
-            }
-            else
-            {
-                yield return null;
-            }
-        }
-    }*/
 
     private void CurveLevel(float x, float y)
     {

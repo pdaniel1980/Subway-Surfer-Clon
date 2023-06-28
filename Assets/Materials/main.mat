@@ -75,7 +75,7 @@ Material:
     - _BumpScale: 1
     - _Cull: 0
     - _Curve_X: -1
-    - _Curve_Y: -1
+    - _Curve_Y: 1
     - _Cutoff: 0
     - _DetailNormalMapScale: 1
     - _DstBlend: 0

@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneController : MonoBehaviour
 {
     private Transform playerTransform;
-    [SerializeField] private float limit = 2086f;
+    [SerializeField] private float limit = 2013.5f;
 
     private void Start()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         CheckPlayerPosition();
     }

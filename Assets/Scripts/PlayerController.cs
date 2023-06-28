@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public enum Side { Left = -2, Middle = 0, Right = 2 }

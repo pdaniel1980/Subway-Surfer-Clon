@@ -2251,14 +2251,15 @@ MonoBehaviour:
   curveX: 0
   curveY: 0
   materials:
-  - {fileID: 2100000, guid: 3d4a515bc1e8a37489a8361c5bb4ef02, type: 2}
-  - {fileID: 2100000, guid: 15fc7c0afa251d645961782dc146bb35, type: 2}
   - {fileID: 2100000, guid: bdb76dd4e900a7f47bf01a1f78f63fc3, type: 2}
+  - {fileID: 2100000, guid: 15fc7c0afa251d645961782dc146bb35, type: 2}
+  - {fileID: 2100000, guid: a8ee4fc6a0957dd4a8a4d45bd25d9995, type: 2}
   waitTimeForCurveAgain: 3
   timeToCurve: 2
-  curveXRandom: 1
-  curveYRandom: 0
+  curveXTarget: 0
+  curveYTarget: 0
   autoCurve: 1
+  allowCurving: 1
 --- !u!1001 &505060383
 PrefabInstance:
   m_ObjectHideFlags: 0

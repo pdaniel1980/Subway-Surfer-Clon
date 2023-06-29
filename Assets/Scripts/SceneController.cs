@@ -3,7 +3,8 @@ using UnityEngine;
 public class SceneController : MonoBehaviour
 {
     private Transform playerTransform;
-    [SerializeField] private float limit = 2013.5f;
+    [SerializeField] private float limit = 2000f;
+    [SerializeField] private float offsetOnResetPosition = 0f;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class SceneController : MonoBehaviour
     {
         if (playerTransform.position.z >= limit)
         {
-            playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, 0);
+            playerTransform.position = new Vector3(playerTransform.position.x, playerTransform.position.y, 0 + offsetOnResetPosition);
         }
     }
 

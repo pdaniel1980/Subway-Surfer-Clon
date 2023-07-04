@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeToStart = 3.0f;
     private PlayerController playerController;
 
-    private bool _gameOver = false;
-    private bool _go = false;
+    [SerializeField] private bool _gameOver = false;
+    [SerializeField] private bool _go = false;
 
     public bool GameOver { get => _gameOver; set => _gameOver = value; }
     public bool Go { get => _go; set => _go = value; }

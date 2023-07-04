@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2957962471796267881}
   - component: {fileID: 2957962471796267880}
   - component: {fileID: 2957962471796267883}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: blocker_jump
   m_TagString: Untagged
   m_Icon: {fileID: 0}

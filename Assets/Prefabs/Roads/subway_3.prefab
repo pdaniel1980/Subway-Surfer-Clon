@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3836778653206649398}
   - component: {fileID: 3836778653206649399}
   - component: {fileID: 132260337668591805}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: subway_3
   m_TagString: Road
   m_Icon: {fileID: 0}

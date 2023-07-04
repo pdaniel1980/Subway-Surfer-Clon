@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1401632677266265644}
   - component: {fileID: 1401632677266265647}
   - component: {fileID: 1401632677266265618}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: tunnel_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}

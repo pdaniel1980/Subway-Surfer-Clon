@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6167805696161936605}
   - component: {fileID: 6167805696161936604}
   - component: {fileID: 6167805696161936607}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: train_sub
   m_TagString: Untagged
   m_Icon: {fileID: 0}

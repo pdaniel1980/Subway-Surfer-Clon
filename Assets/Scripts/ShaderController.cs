@@ -14,10 +14,9 @@ public class ShaderController : MonoBehaviour
     private float curveXCurrent, curveYCurrent;
     private GameManager gameManager;
     [SerializeField] private bool autoCurve = true;
-    private int[] curvePosibleValues = { -1, 1 };
+    private readonly int[] curvePosibleValues = { -1, 1 };
 
     [SerializeField] private bool allowCurving = true;
-
 
     private void Start()
     {

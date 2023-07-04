@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 727017959405405947}
   - component: {fileID: 727017959405405924}
   - component: {fileID: 727017959405405945}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Train_cargo_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

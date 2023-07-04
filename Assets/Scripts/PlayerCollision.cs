@@ -70,7 +70,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void SetAnimatorCollisionZBackward(Collider collider)
     {
-        if (_collisionY == CollisionY.LowDown)
+        if (_collisionY == CollisionY.LowDown && !playerController.IsRolling)
         {
             collider.enabled = false;
             playerController.SetPlayerAnimator(playerController.IdStumbleLow, false);

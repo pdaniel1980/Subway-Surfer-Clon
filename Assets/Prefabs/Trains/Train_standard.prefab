@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4591621080174204238}
   - component: {fileID: 4591621080174204239}
   - component: {fileID: 4591621080174204240}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Train_standard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

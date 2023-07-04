@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 538735337886511735}
   - component: {fileID: 538735337886511734}
   - component: {fileID: 538735337886511733}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: blocker_roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &538735337886511735
 MeshFilter:
@@ -103,5 +103,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8798635, y: 2.260028, z: 0.6726855}
-  m_Center: {x: 0.009040713, y: 1.8090215, z: -0.47509366}
+  m_Size: {x: 1.8798635, y: 2.1187747, z: 0.6726855}
+  m_Center: {x: 0.009040713, y: 1.8796481, z: -0.47509366}

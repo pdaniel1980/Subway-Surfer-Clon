@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9051997516702338128}
   - component: {fileID: 9051997516702338223}
   - component: {fileID: 9051997516702338222}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Train_ramp
   m_TagString: Ramp
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 9051997517706620110}
   - component: {fileID: 9051997517706620109}
   - component: {fileID: 9051997517706620108}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Collision
   m_TagString: Untagged
   m_Icon: {fileID: 0}

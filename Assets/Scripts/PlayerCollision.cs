@@ -12,7 +12,6 @@ public class PlayerCollision : MonoBehaviour
 
     private bool _sideCollision = false;
 
-
     private CharacterController characterController;
     private PlayerController playerController;
 
@@ -44,27 +43,11 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (_collisionZ == CollisionZ.Middle)
         {
-            if (_collisionX == CollisionX.Left)
-            {
-                playerController.SetPlayerAnimator(playerController.IdStumbleSideLeft, false);
-                _sideCollision = true;
-            }
-            else if (_collisionX == CollisionX.Right)
-            {
-                playerController.SetPlayerAnimator(playerController.IdStumbleSideRight, false);
-                _sideCollision = true;
-            }
+            SetAnimatorCollisionZMiddle();
         }
         else
         {
-            if (_collisionX == CollisionX.Left)
-            {
-                playerController.SetPlayerAnimatorWithLayer(playerController.IdStumbleCornerLeft);
-            }
-            else if (_collisionX == CollisionX.Right)
-            {
-                playerController.SetPlayerAnimatorWithLayer(playerController.IdStumbleCornerRight);
-            }
+            SetAnimatorCollisionZDefault();
         }
     }
 
@@ -97,6 +80,32 @@ public class PlayerCollision : MonoBehaviour
         {
             playerController.SetPlayerAnimator(playerController.IdDeathUpper, false);
             playerController.GameManager.EndGame();
+        }
+    }
+
+    private void SetAnimatorCollisionZMiddle()
+    {
+        if (_collisionX == CollisionX.Left)
+        {
+            playerController.SetPlayerAnimator(playerController.IdStumbleSideLeft, false);
+            _sideCollision = true;
+        }
+        else if (_collisionX == CollisionX.Right)
+        {
+            playerController.SetPlayerAnimator(playerController.IdStumbleSideRight, false);
+            _sideCollision = true;
+        }
+    }
+
+    private void SetAnimatorCollisionZDefault()
+    {
+        if (_collisionX == CollisionX.Left)
+        {
+            playerController.SetPlayerAnimatorWithLayer(playerController.IdStumbleCornerLeft);
+        }
+        else if (_collisionX == CollisionX.Right)
+        {
+            playerController.SetPlayerAnimatorWithLayer(playerController.IdStumbleCornerRight);
         }
     }
 

@@ -9,6 +9,7 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float speedOffset;
     [SerializeField] private float maxDistance;
     private float y;
+    private RaycastHit hitInfo;
 
     private void Awake()
     {
@@ -29,8 +30,6 @@ public class CameraFollow : MonoBehaviour
 
     private void UpdteCameraOffset()
     {
-        RaycastHit hitInfo;
-
         if (Physics.Raycast(target.position, Vector3.down, out hitInfo, maxDistance))
         {
             y = Mathf.Lerp(y, hitInfo.point.y, Time.deltaTime * speedOffset);

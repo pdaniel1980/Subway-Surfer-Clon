@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TrainController : MonoBehaviour
@@ -18,7 +15,7 @@ public class TrainController : MonoBehaviour
     private bool moveTrain;
 
     // Raycast variables
-    private RaycastHit hit;
+    private RaycastHit hitInfo;
     private Vector3 rayPosition;
     private readonly float distance = 110f;
     private readonly float sphereRadius = 5f;
@@ -28,6 +25,7 @@ public class TrainController : MonoBehaviour
         rb = gameObjectTrain.AddComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX;
         trainTransform = gameObjectTrain.transform;
+        gameObjectTrain.tag = "MovingTrain";
         selfTransform = transform;
     }
 
@@ -46,9 +44,9 @@ public class TrainController : MonoBehaviour
     private void FixedUpdate()
     {
         rayPosition = new Vector3(trainTransform.position.x, trainTransform.position.y, trainTransform.position.z);
-        if (Physics.SphereCast(rayPosition, sphereRadius, Vector3.back, out hit, distance))
+        if (Physics.SphereCast(rayPosition, sphereRadius, Vector3.back, out hitInfo, distance))
         {
-            if (hit.transform.parent != null && hit.transform.parent.CompareTag("Player"))
+            if (hitInfo.transform.parent != null && hitInfo.transform.parent.CompareTag("Player"))
                 moveTrain = true;
         }
     }
@@ -59,16 +57,6 @@ public class TrainController : MonoBehaviour
         {
             StopTrain();
         }       
-    }
-
-    private void OnDrawGizmos()
-    {
-        // Draw a visual representation of the sphere cast in the scene view
-        Vector3 sphereDirection = Vector3.back;
-
-        // Draw the sphere cast shape
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(rayPosition + sphereDirection * distance, sphereRadius);
     }
 
     private void MoveTrain()

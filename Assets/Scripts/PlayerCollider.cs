@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCollider : MonoBehaviour
 {
-    [SerializeField] private PlayerCollision playerCollision;
+    private PlayerCollision playerCollision;
 
     private void Awake()
     {

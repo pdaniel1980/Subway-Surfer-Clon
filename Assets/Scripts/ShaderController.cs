@@ -10,13 +10,14 @@ public class ShaderController : MonoBehaviour
     [SerializeField] private float timeToCurve = 2.0f;
     private float currentTime;
 
-    [SerializeField] private int curveXTarget, curveYTarget;
+    private int curveXTarget, curveYTarget;
     private float curveXCurrent, curveYCurrent;
     private GameManager gameManager;
-    [SerializeField] private bool autoCurve = true;
+
     private readonly int[] curvePosibleValues = { -1, 1 };
 
-    [SerializeField] private bool allowCurving = true;
+    [SerializeField] private bool autoCurve = true;
+    private bool allowCurving = true;
 
     private void Start()
     {
@@ -41,7 +42,6 @@ public class ShaderController : MonoBehaviour
 
     private void Curve()
     {
-
         if (allowCurving)
         {
             currentTime += Time.deltaTime;

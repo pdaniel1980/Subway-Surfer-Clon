@@ -407,8 +407,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToStart: 3
-  _gameOver: 0
-  _go: 0
 --- !u!4 &11536380
 Transform:
   m_ObjectHideFlags: 0
@@ -4915,10 +4913,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a8ee4fc6a0957dd4a8a4d45bd25d9995, type: 2}
   waitTimeForCurveAgain: 3
   timeToCurve: 2
-  curveXTarget: 0
-  curveYTarget: 0
   autoCurve: 1
-  allowCurving: 1
 --- !u!1001 &489408470
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8583,10 +8578,6 @@ PrefabInstance:
     - target: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
       propertyPath: m_Name
       value: train_sub (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
-      propertyPath: m_TagString
-      value: MovingTrain
       objectReference: {fileID: 0}
     - target: {fileID: 6167805696161936606, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
       propertyPath: m_RootOrder
@@ -18068,10 +18059,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: train_sub_3 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 3599094169744525811, guid: c2efb001562594f73aea21800964bf52, type: 3}
-      propertyPath: m_TagString
-      value: MovingTrain
-      objectReference: {fileID: 0}
     - target: {fileID: 3599094169744525822, guid: c2efb001562594f73aea21800964bf52, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -20798,7 +20785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6188452164009491363, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1530
       objectReference: {fileID: 0}
     - target: {fileID: 6188452164009491363, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20831,6 +20818,10 @@ PrefabInstance:
     - target: {fileID: 7186220723518474672, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7186220723518474672, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

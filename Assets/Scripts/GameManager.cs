@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         _gameOver = true;
         _go = false;
+        playerController.Die();
     }
 
     private void OnGUI()

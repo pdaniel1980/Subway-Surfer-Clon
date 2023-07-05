@@ -6,9 +6,9 @@ public enum CollisionZ { None, Forward, Middle, Backward }
 
 public class PlayerCollision : MonoBehaviour
 {
-    private CollisionX _collisionX;
-    private CollisionY _collisionY;
-    private CollisionZ _collisionZ;
+    [SerializeField] private CollisionX _collisionX;
+    [SerializeField] private CollisionY _collisionY;
+    [SerializeField] private CollisionZ _collisionZ;
 
     private bool _sideCollision = false;
 

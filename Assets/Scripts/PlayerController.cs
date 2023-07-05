@@ -97,12 +97,34 @@ public class PlayerController : MonoBehaviour
             Jump();
             Roll();
         }
-        else if (_gameManager.GameOver)
+    }
+
+    public void Die()
+    {
+        Debug.Log("Is Grounded: " + _selfCharacterController.isGrounded);
+        _ = StartCoroutine(FallRoutine());
+        
+        
+    }
+
+    private IEnumerator FallRoutine()
+    {
+        while (!_selfCharacterController.isGrounded)
         {
-            forwardSpeed = 0f;
             Fall();
             MovePlayer();
+            yield return null;
         }
+
+        yield return null;
+
+        StopAnimations();
+        _selfCharacterController.enabled = false;
+    }
+
+    public void StopAnimations()
+    {
+        selfAnimator.StopPlayback();
     }
 
     public void SetActiveAnimator(bool activate)
@@ -190,16 +212,20 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
-        motion = new Vector3(xPosition - selfTransform.position.x, yPosition * Time.deltaTime, forwardSpeed * Time.deltaTime);
-        _selfCharacterController.Move(motion);
+        if (_selfCharacterController.enabled)
+        {
+            xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
+            motion = new Vector3(xPosition - selfTransform.position.x, yPosition * Time.deltaTime, forwardSpeed * Time.deltaTime);
+            _selfCharacterController.Move(motion);
+        }
     }
 
     private void BlouncePlayer()
     {
         if (playerCollision.SideCollision)
         {
-            _ = StartCoroutine(WaitToBackPosition(0.3f));
+            
+            _ = StartCoroutine(WaitToBackPosition(GetCurrentAnimatorLength()));
         }
     }
 
@@ -209,7 +235,16 @@ public class PlayerController : MonoBehaviour
 
         UpdatePlayerXPosition(previuosPosition);
         MovePlayer();
+
         playerCollision.SideCollision = false;
+    }
+
+    private float GetCurrentAnimatorLength()
+    {
+        AnimatorStateInfo stateInfo = selfAnimator.GetCurrentAnimatorStateInfo((int)LayerAnimator.Base);
+        
+
+        return stateInfo.length;
     }
 
     private void Jump()
@@ -218,7 +253,7 @@ public class PlayerController : MonoBehaviour
         {
             isJumping = false;
 
-            if (selfAnimator.GetCurrentAnimatorStateInfo(0).IsName("Fall"))
+            if (selfAnimator.GetCurrentAnimatorStateInfo((int) LayerAnimator.Base).IsName("Fall"))
                 SetPlayerAnimator(IdLanding, false);
 
             if (swipeUp && !_isRolling)

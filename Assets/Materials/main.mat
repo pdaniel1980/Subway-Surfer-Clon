@@ -70,6 +70,7 @@ Material:
     m_Ints: []
     m_Floats:
     - V_CW_RangeFadeDrawer: 0
+    - _Alpha: 1
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1

@@ -9803,6 +9803,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Train_cargo_3 (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5286948162216373949, guid: e9d33d0f6f26148a8bada507c2017c60, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bdb76dd4e900a7f47bf01a1f78f63fc3, type: 2}
+    - target: {fileID: 5286948162216373949, guid: e9d33d0f6f26148a8bada507c2017c60, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 15fc7c0afa251d645961782dc146bb35, type: 2}
     - target: {fileID: 5286948162216373951, guid: e9d33d0f6f26148a8bada507c2017c60, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -20763,6 +20771,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4281744248104867546, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281744248104867546, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281744248104867546, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: m_Center.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4281744248104867546, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4281744248104867547, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: jumpPower
       value: 6
@@ -20770,6 +20794,14 @@ PrefabInstance:
     - target: {fileID: 4281744248104867547, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: forwardSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943782909630303026, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943782909630303026, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: m_Direction
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6188452164009491363, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: m_RootOrder

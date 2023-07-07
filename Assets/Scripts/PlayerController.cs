@@ -97,14 +97,13 @@ public class PlayerController : MonoBehaviour
             Jump();
             Roll();
         }
+
+        Debug.Log("Velocidad del jugador: " + _selfCharacterController.collisionFlags);
     }
 
     public void Die()
     {
-        Debug.Log("Is Grounded: " + _selfCharacterController.isGrounded);
         _ = StartCoroutine(FallRoutine());
-        
-        
     }
 
     private IEnumerator FallRoutine()
@@ -224,7 +223,6 @@ public class PlayerController : MonoBehaviour
     {
         if (playerCollision.SideCollision)
         {
-            
             _ = StartCoroutine(WaitToBackPosition(GetCurrentAnimatorLength()));
         }
     }
@@ -242,7 +240,6 @@ public class PlayerController : MonoBehaviour
     private float GetCurrentAnimatorLength()
     {
         AnimatorStateInfo stateInfo = selfAnimator.GetCurrentAnimatorStateInfo((int)LayerAnimator.Base);
-        
 
         return stateInfo.length;
     }
@@ -300,5 +297,10 @@ public class PlayerController : MonoBehaviour
                 SetPlayerAnimator(IdRoll, true);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("Col: " + collision.gameObject.name);
     }
 }

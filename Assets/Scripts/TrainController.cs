@@ -23,7 +23,6 @@ public class TrainController : MonoBehaviour
     private void Awake()
     {
         rb = gameObjectTrain.AddComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionX;
         trainTransform = gameObjectTrain.transform;
         gameObjectTrain.tag = "MovingTrain";
         selfTransform = transform;
@@ -67,6 +66,8 @@ public class TrainController : MonoBehaviour
 
     public void StopTrain()
     {
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        moveTrain = false;
         forwardSpeed = 0;
     }
 }

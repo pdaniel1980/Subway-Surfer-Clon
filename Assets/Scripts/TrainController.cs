@@ -29,6 +29,7 @@ public class TrainController : MonoBehaviour
         gameObjectTrain.tag = "MovingTrain";
         selfTransform = transform;
         motion = new Vector3(0, 0, -forwardSpeed);
+        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
     }
 
     private void Start()

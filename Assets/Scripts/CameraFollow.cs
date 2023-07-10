@@ -39,4 +39,9 @@ public class CameraFollow : MonoBehaviour
         selfTransform.position = followPosition;
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(target.position, Vector3.down);
+    }
 }

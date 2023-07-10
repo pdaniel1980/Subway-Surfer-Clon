@@ -97,8 +97,6 @@ public class PlayerController : MonoBehaviour
             Jump();
             Roll();
         }
-
-        Debug.Log("Velocidad del jugador: " + _selfCharacterController.collisionFlags);
     }
 
     public void Die()
@@ -297,10 +295,5 @@ public class PlayerController : MonoBehaviour
                 SetPlayerAnimator(IdRoll, true);
             }
         }
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Col: " + collision.gameObject.name);
     }
 }

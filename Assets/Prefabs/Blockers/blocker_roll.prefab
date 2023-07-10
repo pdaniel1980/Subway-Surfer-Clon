@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 538735337886511735}
   - component: {fileID: 538735337886511734}
   - component: {fileID: 538735337886511733}
-  m_Layer: 2
+  m_Layer: 1
   m_Name: blocker_roll
   m_TagString: Obstacle
   m_Icon: {fileID: 0}

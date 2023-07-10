@@ -37,17 +37,20 @@ public class PlayerCollision : MonoBehaviour
 
     private void SetAnimatorCollision(Collider collider)
     {
-        if (_collisionZ == CollisionZ.Backward && _collisionX == CollisionX.Middle)
-        {
-            SetAnimatorCollisionZBackward(collider);
-        }
-        else if (_collisionZ == CollisionZ.Middle)
-        {
-            SetAnimatorCollisionZMiddle();
-        }
-        else
-        {
-            SetAnimatorCollisionZDefault();
+        if (!collider.CompareTag("Ramp"))
+        { 
+            if (_collisionZ == CollisionZ.Backward && _collisionX == CollisionX.Middle)
+            {
+                SetAnimatorCollisionZBackward(collider);
+            }
+            else if (_collisionZ == CollisionZ.Middle)
+            {
+                SetAnimatorCollisionZMiddle();
+            }
+            else
+            {
+                SetAnimatorCollisionZDefault();
+            }
         }
     }
 

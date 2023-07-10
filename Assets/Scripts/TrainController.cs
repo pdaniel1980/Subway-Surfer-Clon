@@ -4,6 +4,8 @@ public class TrainController : MonoBehaviour
 {
     [SerializeField] private float forwardSpeed = 35f;
     [SerializeField] private GameObject gameObjectTrain;
+    [SerializeField] private float scopeDistance = 110f;
+    [SerializeField] private LayerMask layerMask;
 
     private GameManager gameManager;
     private Transform trainTransform;
@@ -16,8 +18,8 @@ public class TrainController : MonoBehaviour
 
     // Raycast variables
     private RaycastHit hitInfo;
-    private Vector3 rayPosition;
-    private readonly float distance = 110f;
+    private Ray rayPosition;
+    
     private readonly float sphereRadius = 5f;
 
     private void Awake()
@@ -26,6 +28,7 @@ public class TrainController : MonoBehaviour
         trainTransform = gameObjectTrain.transform;
         gameObjectTrain.tag = "MovingTrain";
         selfTransform = transform;
+        motion = new Vector3(0, 0, -forwardSpeed);
     }
 
     private void Start()
@@ -42,11 +45,11 @@ public class TrainController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rayPosition = new Vector3(trainTransform.position.x, trainTransform.position.y, trainTransform.position.z);
-        if (Physics.SphereCast(rayPosition, sphereRadius, Vector3.back, out hitInfo, distance))
+        rayPosition = new Ray(trainTransform.position, Vector3.back);
+
+        if (Physics.SphereCast(rayPosition, sphereRadius, scopeDistance, layerMask))
         {
-            if (hitInfo.transform.parent != null && hitInfo.transform.parent.CompareTag("Player"))
-                moveTrain = true;
+            moveTrain = true;
         }
     }
 
@@ -60,7 +63,6 @@ public class TrainController : MonoBehaviour
 
     private void MoveTrain()
     {
-        motion = new Vector3(trainTransform.position.x, trainTransform.position.y, -forwardSpeed);
         rb.velocity = motion;
     }
 

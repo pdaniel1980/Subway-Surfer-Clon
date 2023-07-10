@@ -1331,7 +1331,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0080e1b8fe4924f2ebbe4a1f86edeb42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollision: {fileID: 0}
 --- !u!136 &4943782909630303026
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1582,7 +1581,7 @@ GameObject:
   - component: {fileID: 4281744248104867546}
   - component: {fileID: 4281744248104867547}
   - component: {fileID: 9009446080726746273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1610,7 +1609,7 @@ Transform:
   - {fileID: 8546721540930807049}
   - {fileID: 6789070163801122375}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4281744248104867545
 Animator:
@@ -1657,7 +1656,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.45, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &4281744248104867547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1670,9 +1669,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b34dcbf064d5840afa6860970bf9f862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 10
+  forwardSpeed: 8
   dodgeSpeed: 10
-  jumpPower: 15
+  jumpPower: 6
+  position: 0
+  previuosPosition: 0
 --- !u!114 &9009446080726746273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1685,6 +1686,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515fcb2127ae043a39986ec2f325fff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collisionX: 0
+  _collisionY: 0
+  _collisionZ: 0
 --- !u!1 &7371162530973715977
 GameObject:
   m_ObjectHideFlags: 0

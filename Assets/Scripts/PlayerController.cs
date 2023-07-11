@@ -12,19 +12,26 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpPower = 10f;
     [SerializeField] private Side position;
     [SerializeField] private Side previuosPosition;
+
     private Transform selfTransform;
+
+    // Variable de movimientos
     private bool swipeLeft, swipeRight, swipeUp, swipeDown;
     private bool isJumping;
     private bool _isRolling;
+    public bool IsRolling { get => _isRolling; }
     private float rollTimer;
-    private float newXPosition;
-    private float xPosition;
+    private Vector3 motion;
+
+    // Variable de posicion del player
+    private float xPosition, newXPosition;
     private float yPosition;
     private Vector3 standCharacterCenter;
-    private Vector3 rollCharacterCenter;
     private float standCharacterHeight;
+    private Vector3 rollCharacterCenter;
     private float rollCharacterHeight;
 
+    // Animaciones
     private Animator selfAnimator;
     private int IdDodgeLeft = Animator.StringToHash("DodgeLeft");
     private int IdDodgeRight = Animator.StringToHash("DodgeRight");
@@ -44,43 +51,40 @@ public class PlayerController : MonoBehaviour
     private int _IdDeathLower = Animator.StringToHash("DeathLower");
     private int _IdDeathMovingTrain = Animator.StringToHash("DeathMovingTrain");
     private int _IdDeathUpper = Animator.StringToHash("DeathUpper");
-    public int IdStumbleLow { get => _IdStumbleLow; set => _IdStumbleLow = value; }
-    public int IdStumbleCornerLeft { get => _IdStumbleCornerLeft; set => _IdStumbleCornerLeft = value; }
-    public int IdStumbleCornerRight { get => _IdStumbleCornerRight; set => _IdStumbleCornerRight = value; }
-    public int IdStumbleFall { get => _IdStumbleFall; set => _IdStumbleFall = value; }
-    public int IdStumbleOffLeft { get => _IdStumbleOffLeft; set => _IdStumbleOffLeft = value; }
-    public int IdStumbleOffRight { get => _IdStumbleOffRight; set => _IdStumbleOffRight = value; }
-    public int IdStumbleSideLeft { get => _IdStumbleSideLeft; set => _IdStumbleSideLeft = value; }
-    public int IdStumbleSideRight { get => _IdStumbleSideRight; set => _IdStumbleSideRight = value; }
-    public int IdDeathBounce { get => _IdDeathBounce; set => _IdDeathBounce = value; }
-    public int IdDeathLower { get => _IdDeathLower; set => _IdDeathLower = value; }
-    public int IdDeathMovingTrain { get => _IdDeathMovingTrain; set => _IdDeathMovingTrain = value; }
-    public int IdDeathUpper { get => _IdDeathUpper; set => _IdDeathUpper = value; }
+    public int IdStumbleLow { get => _IdStumbleLow; }
+    public int IdStumbleCornerLeft { get => _IdStumbleCornerLeft; }
+    public int IdStumbleCornerRight { get => _IdStumbleCornerRight; }
+    public int IdStumbleFall { get => _IdStumbleFall; }
+    public int IdStumbleOffLeft { get => _IdStumbleOffLeft; }
+    public int IdStumbleOffRight { get => _IdStumbleOffRight; }
+    public int IdStumbleSideLeft { get => _IdStumbleSideLeft; }
+    public int IdStumbleSideRight { get => _IdStumbleSideRight; }
+    public int IdDeathBounce { get => _IdDeathBounce; }
+    public int IdDeathLower { get => _IdDeathLower; }
+    public int IdDeathMovingTrain { get => _IdDeathMovingTrain; }
+    public int IdDeathUpper { get => _IdDeathUpper; }
 
     private PlayerCollision playerCollision;
-    private CharacterController _selfCharacterController;
-    public CharacterController SelfCharacterController { get => _selfCharacterController; set => _selfCharacterController = value; }
-    public bool IsRolling { get => _isRolling; set => _isRolling = value; }
-
-    private Vector3 motion;
+    private CharacterController selfCharacterController;
 
     private GameManager _gameManager;
-    public GameManager GameManager { get => _gameManager; set => _gameManager = value; }
+    public GameManager GameManager { get => _gameManager; }
 
     private void Awake()
     {
         selfTransform = GetComponent<Transform>();
         selfAnimator = GetComponent<Animator>();
-        _selfCharacterController = GetComponent<CharacterController>();
+        selfCharacterController = GetComponent<CharacterController>();
         playerCollision = GetComponent<PlayerCollision>();
     }
 
     void Start()
     {
         position = Side.Middle;
+        // Fix: para asegurarnos de no tener la animacion de falling al inicio del juego 
         yPosition = -7f;
-        standCharacterCenter = _selfCharacterController.center;
-        standCharacterHeight = _selfCharacterController.height;
+        standCharacterCenter = selfCharacterController.center;
+        standCharacterHeight = selfCharacterController.height;
         rollCharacterCenter = new Vector3(0, 0.2f, 0);
         rollCharacterHeight = 0.4f;
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -99,14 +103,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Cuando el player muere
     public void Die()
     {
         _ = StartCoroutine(FallRoutine());
     }
 
+    // Corrutina que verifica si el player esta en el aire para que caiga hasta el piso
     private IEnumerator FallRoutine()
     {
-        while (!_selfCharacterController.isGrounded)
+        while (!selfCharacterController.isGrounded)
         {
             Fall();
             MovePlayer();
@@ -116,19 +122,22 @@ public class PlayerController : MonoBehaviour
         yield return null;
 
         StopAnimations();
-        _selfCharacterController.enabled = false;
+        selfCharacterController.enabled = false;
     }
 
+    // Paramos todas las animaciones
     public void StopAnimations()
     {
         selfAnimator.StopPlayback();
     }
 
+    // Para activar o desactivar las animaciones
     public void SetActiveAnimator(bool activate)
     {
         selfAnimator.enabled = activate;
     }
 
+    // Obtenemos la direccion del comando
     private void GetSwipe()
     {
         swipeLeft = Input.GetKeyDown(KeyCode.LeftArrow);
@@ -137,6 +146,7 @@ public class PlayerController : MonoBehaviour
         swipeDown = Input.GetKeyDown(KeyCode.DownArrow);
     }
 
+    // Establecemos la posicion del player para el movimiento
     private void SetPlayerPosition()
     {
         if (swipeLeft && !_isRolling)
@@ -209,14 +219,15 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (_selfCharacterController.enabled)
+        if (selfCharacterController.enabled)
         {
             xPosition = Mathf.Lerp(xPosition, newXPosition, dodgeSpeed * Time.deltaTime);
             motion = new Vector3(xPosition - selfTransform.position.x, yPosition * Time.deltaTime, forwardSpeed * Time.deltaTime);
-            _selfCharacterController.Move(motion);
+            selfCharacterController.Move(motion);
         }
     }
 
+    // En caso de colision al costado del objeto, rebota el player a la posicion anterior
     private void BlouncePlayer()
     {
         if (playerCollision.SideCollision)
@@ -225,6 +236,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Corrutina que espera el tiempo de duracion de colision de la animacion para retornar al player a la posicion anterior
     IEnumerator WaitToBackPosition(float timeToBack)
     {
         yield return new WaitForSeconds(timeToBack);
@@ -235,6 +247,7 @@ public class PlayerController : MonoBehaviour
         playerCollision.SideCollision = false;
     }
 
+    // Obtenemos la duracion de la animacion que se esta ejecutando
     private float GetCurrentAnimatorLength()
     {
         AnimatorStateInfo stateInfo = selfAnimator.GetCurrentAnimatorStateInfo((int)LayerAnimator.Base);
@@ -244,7 +257,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (_selfCharacterController.isGrounded)
+        if (selfCharacterController.isGrounded)
         {
             isJumping = false;
 
@@ -268,13 +281,14 @@ public class PlayerController : MonoBehaviour
     {
         yPosition -= jumpPower * 2 * Time.deltaTime;
 
-        if (_selfCharacterController.velocity.y <= 0 && !_gameManager.GameOver)
+        // En caso que el juego este en curso llamamos a la animacion de caida
+        if (selfCharacterController.velocity.y <= 0 && !_gameManager.GameOver)
             SetPlayerAnimator(IdFall, true);
     }
 
     private void Roll()
     {
-        if (_selfCharacterController.isGrounded)
+        if (selfCharacterController.isGrounded)
         {
             rollTimer -= Time.deltaTime;
 
@@ -282,16 +296,16 @@ public class PlayerController : MonoBehaviour
             {
                 _isRolling = false;
                 rollTimer = 0;
-                _selfCharacterController.center = standCharacterCenter;
-                _selfCharacterController.height = standCharacterHeight;
+                selfCharacterController.center = standCharacterCenter;
+                selfCharacterController.height = standCharacterHeight;
             }
 
             if (swipeDown && !isJumping)
             {
                 _isRolling = true;
                 rollTimer = 0.5f;
-                _selfCharacterController.center = rollCharacterCenter;
-                _selfCharacterController.height = rollCharacterHeight;
+                selfCharacterController.center = rollCharacterCenter;
+                selfCharacterController.height = rollCharacterHeight;
                 SetPlayerAnimator(IdRoll, true);
             }
         }

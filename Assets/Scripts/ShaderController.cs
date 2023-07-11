@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class ShaderController : MonoBehaviour
 {
+    [Header("Curve Settings")]
     [SerializeField, Range(-1, 1)] private float curveX;
     [SerializeField, Range(-1, 1)] private float curveY;
     [SerializeField] private Material[] materials;
+    [Tooltip("Tiempo de espera para curvar de nuevo el shader")]
     [SerializeField] private float waitTimeForCurveAgain = 3.0f;
+    [Tooltip("Tiempo de curvatura del shader")]
     [SerializeField] private float timeToCurve = 2.0f;
+    [SerializeField] private bool autoCurve = true;
+
     private float currentTime;
 
     private int curveXTarget, curveYTarget;
@@ -15,8 +20,7 @@ public class ShaderController : MonoBehaviour
     private GameManager gameManager;
 
     private readonly int[] curvePosibleValues = { -1, 1 };
-
-    [SerializeField] private bool autoCurve = true;
+    
     private bool allowCurving = true;
 
     private void Start()
@@ -40,6 +44,7 @@ public class ShaderController : MonoBehaviour
         }
     }
 
+    // Efecto de curva aleatoria del nivel
     private void Curve()
     {
         if (allowCurving)
@@ -65,6 +70,7 @@ public class ShaderController : MonoBehaviour
         }
     }
 
+    // Corrutina para esperar el tiempo establecido de permitir la nueva curvatura
     IEnumerator Sleep()
     {
         allowCurving = false;
@@ -72,6 +78,7 @@ public class ShaderController : MonoBehaviour
         allowCurving = true;
     }
 
+    // Establecemos los valores de curvatura del nivel al shader
     private void CurveLevel(float x, float y)
     {
         foreach (var m in materials)

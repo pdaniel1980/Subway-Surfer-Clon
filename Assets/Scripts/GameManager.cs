@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Game Settings")]
     [SerializeField] private float timeToStart = 3.0f;
     private PlayerController playerController;
 
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
         _ = StartCoroutine(CountDownCourutine());
     }
 
+    // Corrutina de cuenta regresiva
     IEnumerator CountDownCourutine()
     {
         while (timeToStart > 0)
@@ -33,6 +35,7 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
+    // Iniciamos el juego, habilitamos las animaciones y seteamos variables para activar los movimientos
     private void StartGame()
     {
         playerController.SetActiveAnimator(true);
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         _go = true;
     }
 
+    // Finalizar el juego
     public void EndGame()
     {
         _gameOver = true;
@@ -47,6 +51,7 @@ public class GameManager : MonoBehaviour
         playerController.Die();
     }
 
+    // Cuenta regresiva y boton RESTART para volver a iniciar el juego en cualquier momento
     private void OnGUI()
     {
         GUIStyle style = new GUIStyle();

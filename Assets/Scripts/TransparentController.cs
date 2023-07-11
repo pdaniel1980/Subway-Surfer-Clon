@@ -1,24 +1,22 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TransparentController : MonoBehaviour
 {
-
-    private Camera mainCamera;
+    [Header("Transparent Setting")]
     [SerializeField] private float raycastDistance = 8f;
     [SerializeField] private float alphaTarget = 0.4f;
     [SerializeField] private float radius = 0.8f;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float timeToTransparent = 0.3f;
     [SerializeField] private Material defaultMaterial;
+    private Camera mainCamera;
 
     private RaycastHit hitInfo;
     private Vector3 origin;
     private MeshRenderer obstacleMeshRenderer;
 
-    void Start()
+    void Awake()
     {
         mainCamera = GetComponent<Camera>();
     }
@@ -30,16 +28,19 @@ public class TransparentController : MonoBehaviour
         SetObstacleDefaultMaterial();
     }
 
+    // Verificamos si damos con un object configurado como obstaculo
     private void CheckObstacle()
     {
         Ray ray = new Ray(origin, Vector3.forward);
 
+        // Si la esfera colisiona con un elemento que perteneza al layerMask pre-configurada, invocamos al coroutine para transparentar
         if (Physics.SphereCast(ray, radius, out hitInfo, raycastDistance, layerMask))
         {
             _ = StartCoroutine(SetTransparencyRoutine());
         }
     }
 
+    // Aplicar transparencia al objeto colisionado con un efecto fade
     IEnumerator SetTransparencyRoutine()
     {
         obstacleMeshRenderer = hitInfo.transform.GetComponent<MeshRenderer>();
@@ -52,8 +53,10 @@ public class TransparentController : MonoBehaviour
         }
     }
 
+    // Bugfix: Metodo necesario para volver a colocar el material inicial al objeto que se transparento
     private void SetObstacleDefaultMaterial()
     {
+        // Al salir del foco de la camara, seteamos el dafaultMaterial
         if (obstacleMeshRenderer != null && obstacleMeshRenderer.transform.position.z < mainCamera.transform.position.z)
         {
             obstacleMeshRenderer.material = defaultMaterial;

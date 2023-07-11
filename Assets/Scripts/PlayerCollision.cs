@@ -27,6 +27,7 @@ public class PlayerCollision : MonoBehaviour
         playerController = GetComponent<PlayerController>();
     }
 
+    // Obtenemos informacion de la colision y establecemos la animacion
     public void OnCharacterCollision(Collider collider)
     {
         _collisionX = GetCollisionX(collider);
@@ -37,6 +38,7 @@ public class PlayerCollision : MonoBehaviour
 
     private void SetAnimatorCollision(Collider collider)
     {
+        // Aseguramos que las colisiones de impacto no se ejecuten cuando subimos a una rampa (Objetos con tag: Ramp)
         if (!collider.CompareTag("Ramp"))
         { 
             if (_collisionZ == CollisionZ.Backward && _collisionX == CollisionX.Middle)
@@ -49,11 +51,12 @@ public class PlayerCollision : MonoBehaviour
             }
             else
             {
-                SetAnimatorCollisionZDefault();
+                SetAnimatorCollisionZCorner();
             }
         }
     }
 
+    // Establecer de animaciones cuando colisiona en la parte de atras del objeto
     private void SetAnimatorCollisionZBackward(Collider collider)
     {
         if (_collisionY == CollisionY.LowDown && !playerController.IsRolling)
@@ -86,6 +89,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
+    // Establecer de animaciones cuando colisiona en los lados del objeto
     private void SetAnimatorCollisionZMiddle()
     {
         if (_collisionX == CollisionX.Left)
@@ -100,7 +104,8 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    private void SetAnimatorCollisionZDefault()
+    // Establecer de animaciones cuando colisiona en las esquinas de los objetos
+    private void SetAnimatorCollisionZCorner()
     {
         if (_collisionX == CollisionX.Left)
         {
@@ -112,6 +117,7 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
+    // Calculo de los puntos de colision en el eje X (lado del objeto)
     private CollisionX GetCollisionX(Collider collider)
     {
         Bounds characterControllerBounds = characterController.bounds;
@@ -138,6 +144,7 @@ public class PlayerCollision : MonoBehaviour
         return colX;
     }
 
+    // Calculo de los puntos de colision en el eje Y (altura del objeto)
     private CollisionY GetCollisionY(Collider collider)
     {
         Bounds characterControllerBounds = characterController.bounds;
@@ -168,6 +175,7 @@ public class PlayerCollision : MonoBehaviour
         return colY;
     }
 
+    // Calculo de los puntos de colision en el eje Z (largo del objeto)
     private CollisionZ GetCollisionZ(Collider collider)
     {
         Bounds characterControllerBounds = characterController.bounds;

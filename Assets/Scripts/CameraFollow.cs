@@ -2,14 +2,17 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
+    [Header("Camera Follow Settings")]
     [SerializeField] private Transform target;
+    [SerializeField] private float speedOffset;
+    [SerializeField] private float maxDistance;
+
     private Transform selfTransform;
     private Vector3 cameraOffset;
     private Vector3 followPosition;
-    [SerializeField] private float speedOffset;
-    [SerializeField] private float maxDistance;
-    private float y;
+    
     private RaycastHit hitInfo;
+    private float y;
 
     private void Awake()
     {
@@ -28,8 +31,10 @@ public class CameraFollow : MonoBehaviour
         UpdteCameraOffset();
     }
 
+    // Calculamos el offset de la camara para dar seguimiento al salto segun la distancia seteada contra el nivel del suelo
     private void UpdteCameraOffset()
     {
+        // En caso que el player suba sobre una plataforma, recalculamos la altura para seguir con la camara
         if (Physics.Raycast(target.position, Vector3.down, out hitInfo, maxDistance))
         {
             y = Mathf.Lerp(y, hitInfo.point.y, Time.deltaTime * speedOffset);
@@ -37,11 +42,5 @@ public class CameraFollow : MonoBehaviour
 
         followPosition.y = cameraOffset.y + y;
         selfTransform.position = followPosition;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(target.position, Vector3.down);
     }
 }

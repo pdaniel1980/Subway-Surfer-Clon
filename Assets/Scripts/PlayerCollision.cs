@@ -21,6 +21,9 @@ public class PlayerCollision : MonoBehaviour
 
     public bool SideCollision { get => _sideCollision; set => _sideCollision = value; }
 
+    private string _colliderTag;
+    public string ColliderTag { get => _colliderTag; }
+
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -33,6 +36,7 @@ public class PlayerCollision : MonoBehaviour
         _collisionX = GetCollisionX(collider);
         _collisionY = GetCollisionY(collider);
         _collisionZ = GetCollisionZ(collider);
+        _colliderTag = collider.tag;
         SetAnimatorCollision(collider);
     }
 
@@ -51,7 +55,7 @@ public class PlayerCollision : MonoBehaviour
             }
             else
             {
-                SetAnimatorCollisionZCorner();
+                SetAnimatorCollisionZCorner(collider);
             }
         }
     }
@@ -66,26 +70,22 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (_collisionY == CollisionY.Down)
         {
-            playerController.SetPlayerAnimator(playerController.IdDeathLower, false);
-            playerController.GameManager.EndGame();
+            SetDeathAnimator(playerController.IdDeathLower);
         }
         else if (_collisionY == CollisionY.Middle)
         {
             if (collider.CompareTag("MovingTrain"))
             {
-                playerController.SetPlayerAnimator(playerController.IdDeathMovingTrain, false);
-                playerController.GameManager.EndGame();
+                SetDeathAnimator(playerController.IdDeathMovingTrain);
             }
             else
             {
-                playerController.SetPlayerAnimator(playerController.IdDeathBounce, false);
-                playerController.GameManager.EndGame();
+                SetDeathAnimator(playerController.IdDeathBounce);
             }
         }
         else if (_collisionY == CollisionY.Up && !playerController.IsRolling)
         {
-            playerController.SetPlayerAnimator(playerController.IdDeathUpper, false);
-            playerController.GameManager.EndGame();
+            SetDeathAnimator(playerController.IdDeathUpper);
         }
     }
 
@@ -105,9 +105,17 @@ public class PlayerCollision : MonoBehaviour
     }
 
     // Establecer de animaciones cuando colisiona en las esquinas de los objetos
-    private void SetAnimatorCollisionZCorner()
+    private void SetAnimatorCollisionZCorner(Collider collider)
     {
-        if (_collisionX == CollisionX.Left)
+        if (collider.CompareTag("Obstacle") || collider.CompareTag("Train"))
+        {
+            SetDeathAnimator(playerController.IdDeathBounce);
+        }
+        else if (collider.CompareTag("MovingTrain"))
+        {
+            SetDeathAnimator(playerController.IdDeathMovingTrain);
+        }
+        else if (_collisionX == CollisionX.Left)
         {
             playerController.SetPlayerAnimatorWithLayer(playerController.IdStumbleCornerLeft);
         }
@@ -115,6 +123,12 @@ public class PlayerCollision : MonoBehaviour
         {
             playerController.SetPlayerAnimatorWithLayer(playerController.IdStumbleCornerRight);
         }
+    }
+
+    private void SetDeathAnimator(int IdAnimation)
+    {
+        playerController.SetPlayerAnimator(IdAnimation, false);
+        playerController.GameManager.EndGame();
     }
 
     // Calculo de los puntos de colision en el eje X (lado del objeto)

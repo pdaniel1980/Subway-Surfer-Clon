@@ -232,7 +232,7 @@ public class PlayerController : MonoBehaviour
     {
         if (playerCollision.SideCollision)
         {
-            _ = StartCoroutine(WaitToBackPosition(GetCurrentAnimatorLength()));
+            _ = StartCoroutine(WaitToBackPosition(GetTimeToBack()));
         }
     }
 
@@ -248,11 +248,12 @@ public class PlayerController : MonoBehaviour
     }
 
     // Obtenemos la duracion de la animacion que se esta ejecutando
-    private float GetCurrentAnimatorLength()
+    private float GetTimeToBack()
     {
         AnimatorStateInfo stateInfo = selfAnimator.GetCurrentAnimatorStateInfo((int)LayerAnimator.Base);
 
-        return stateInfo.length;
+        // Si la colision es al costado de un tren en movimiento, el tiempo de espera para rebotar el player es 0, caso contrario el tiempo de la animacion
+        return playerCollision.ColliderTag.Equals("MovingTrain") ? 0 : stateInfo.length;
     }
 
     private void Jump()

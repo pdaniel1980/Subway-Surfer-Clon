@@ -53,7 +53,8 @@ public class TransparentController : MonoBehaviour
         }
     }
 
-    // Bugfix: Metodo necesario para volver a colocar el material inicial al objeto que se transparento
+    // Volver a colocar el material inicial al objeto que se transparento
+    // Resuelve el bug donde se genera un comportamiento no esperado al tocar el alpha del shader cuando se produce la curvatura
     private void SetObstacleDefaultMaterial()
     {
         // Al salir del foco de la camara, seteamos el dafaultMaterial

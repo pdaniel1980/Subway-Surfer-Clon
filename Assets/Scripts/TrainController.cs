@@ -11,7 +11,9 @@ public class TrainController : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
 
     private GameManager gameManager;
+    private Camera mainCamera;
     private Transform trainTransform;
+    private Vector3 startTrainPosition;
     private Transform selfTransform;
     private Rigidbody rb;
 
@@ -20,7 +22,6 @@ public class TrainController : MonoBehaviour
     private bool moveTrain;
 
     // Raycast variables
-    private RaycastHit hitInfo;
     private Ray rayPosition;
     
     private readonly float sphereRadius = 5f;
@@ -29,16 +30,21 @@ public class TrainController : MonoBehaviour
     {
         rb = gameObjectTrain.AddComponent<Rigidbody>();
         trainTransform = gameObjectTrain.transform;
+        startTrainPosition = trainTransform.position;
+
         // Etiquetamos al objecto como MovingTrain necesario para establecer la animacion cuando choca al player
         gameObjectTrain.tag = "MovingTrain";
         selfTransform = transform;
+        // Establecemos la velocidad para el movimiento del tren
         motion = new Vector3(0, 0, -forwardSpeed);
-        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+
+        SetInitRigibodyConstraints();
     }
 
     private void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        mainCamera = GameObject.FindObjectOfType<Camera>();
     }
 
     private void Update()
@@ -58,15 +64,24 @@ public class TrainController : MonoBehaviour
         }
     }
 
-    // Si llegamos al limite de movimiento frenamos el tren para evitar que avance de forma infinita
     private void CheckTrainPosition()
     {
+        // Si llegamos al limite de movimiento frenamos el tren para evitar que avance de forma infinita
         if (trainTransform.position.z <= selfTransform.position.z || gameManager.GameOver == true)
         {
             StopTrain();
         }
 
-        // TODO: Reset train position
+        // Si la camara pasa la posicion inicial del tren + su tamanho, entonces inicializamos los atributos
+        if (trainTransform.position != startTrainPosition && mainCamera.transform.position.z > startTrainPosition.z + GetTrainSize())
+        {
+            ResetTrainAttributes();
+        }
+    }
+
+    private float GetTrainSize()
+    {
+        return trainTransform.GetComponent<Collider>().bounds.size.z;
     }
 
     private void MoveTrain()
@@ -78,6 +93,17 @@ public class TrainController : MonoBehaviour
     {
         rb.constraints = RigidbodyConstraints.FreezeAll;
         moveTrain = false;
-        forwardSpeed = 0;
+    }
+
+    private void ResetTrainAttributes()
+    {
+        SetInitRigibodyConstraints();
+        trainTransform.position = startTrainPosition;
+    }
+
+    private void SetInitRigibodyConstraints()
+    {
+        // Solo dejamos la posicion Z sin congelar para que el tren pueda moverse cuando sea necesario
+        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
     }
 }

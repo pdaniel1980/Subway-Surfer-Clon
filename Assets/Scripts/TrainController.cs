@@ -5,7 +5,6 @@ public class TrainController : MonoBehaviour
     [Header("Train Settings")]
     [Tooltip("Velocidad del tren")]
     [SerializeField] private float forwardSpeed = 35f;
-    [SerializeField] private GameObject gameObjectTrain;
     [Tooltip("Distancia del ray para detectar al player")]
     [SerializeField] private float scopeDistance = 110f;
     [SerializeField] private LayerMask layerMask;
@@ -14,7 +13,6 @@ public class TrainController : MonoBehaviour
     private Camera mainCamera;
     private Transform trainTransform;
     private Vector3 startTrainPosition;
-    private Transform selfTransform;
     private Rigidbody rb;
 
     // Variables de movimiento del tren
@@ -23,18 +21,20 @@ public class TrainController : MonoBehaviour
 
     // Raycast variables
     private Ray rayPosition;
-    
+
     private readonly float sphereRadius = 5f;
+    private float limitToMove;
 
     private void Awake()
     {
-        rb = gameObjectTrain.AddComponent<Rigidbody>();
-        trainTransform = gameObjectTrain.transform;
+        rb = gameObject.AddComponent<Rigidbody>();
+        trainTransform = gameObject.transform;
         startTrainPosition = trainTransform.position;
 
         // Etiquetamos al objecto como MovingTrain necesario para establecer la animacion cuando choca al player
-        gameObjectTrain.tag = "MovingTrain";
-        selfTransform = transform;
+        gameObject.tag = "MovingTrain";
+        // Calculamos el limite hasta donde puede avanzar el ten
+        limitToMove = trainTransform.position.z - scopeDistance;
         // Establecemos la velocidad para el movimiento del tren
         motion = new Vector3(0, 0, -forwardSpeed);
 
@@ -67,7 +67,7 @@ public class TrainController : MonoBehaviour
     private void CheckTrainPosition()
     {
         // Si llegamos al limite de movimiento frenamos el tren para evitar que avance de forma infinita
-        if (trainTransform.position.z <= selfTransform.position.z || gameManager.GameOver == true)
+        if (trainTransform.position.z <= limitToMove || gameManager.GameOver == true)
         {
             StopTrain();
         }

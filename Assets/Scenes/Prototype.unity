@@ -2549,7 +2549,7 @@ GameObject:
   m_Component:
   - component: {fileID: 233760068}
   m_Layer: 0
-  m_Name: Train_standard_3
+  m_Name: TrainStandard3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2862,7 +2862,7 @@ GameObject:
   m_Component:
   - component: {fileID: 277486066}
   m_Layer: 0
-  m_Name: tunnel_r
+  m_Name: TunnelR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3330,16 +3330,14 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1293091051}
   m_SourcePrefab: {fileID: 100100000, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
 --- !u!4 &326488865 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6167805696161936606, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
-  m_PrefabInstance: {fileID: 326488864}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &326488866 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
   m_PrefabInstance: {fileID: 326488864}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &326706881
@@ -3946,7 +3944,7 @@ GameObject:
   m_Component:
   - component: {fileID: 384846753}
   m_Layer: 0
-  m_Name: blocker_roll
+  m_Name: BlockerRoll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5094,7 +5092,7 @@ GameObject:
   m_Component:
   - component: {fileID: 494320070}
   m_Layer: 0
-  m_Name: train_sub_3
+  m_Name: TrainSub3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5589,7 +5587,7 @@ GameObject:
   m_Component:
   - component: {fileID: 539659208}
   m_Layer: 0
-  m_Name: road
+  m_Name: Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6512,56 +6510,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 727017959405405946, guid: 22cca035bb0444613ab7742d261cab36, type: 3}
   m_PrefabInstance: {fileID: 590131451}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &600811687
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 600811688}
-  - component: {fileID: 600811690}
-  m_Layer: 0
-  m_Name: PointC
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &600811688
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 600811687}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1540}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1947560293}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &600811690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 600811687}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83b21cd92934f4fc7a962100de075d30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardSpeed: 35
-  gameObjectTrain: {fileID: 837614227}
-  scopeDistance: 110
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1001 &611879534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6638,7 +6586,7 @@ GameObject:
   m_Component:
   - component: {fileID: 617317750}
   m_Layer: 0
-  m_Name: subway_3
+  m_Name: Subway3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7554,7 +7502,7 @@ GameObject:
   - component: {fileID: 705507995}
   - component: {fileID: 705507994}
   m_Layer: 0
-  m_Name: Directional Light
+  m_Name: DirectionalLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7652,7 +7600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 708808687}
   m_Layer: 0
-  m_Name: blocker_jump
+  m_Name: BlockerJump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8633,11 +8581,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 538735337886511732, guid: 388faa665968c454388f1f54d491ca64, type: 3}
   m_PrefabInstance: {fileID: 829958604}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &837614227 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
-  m_PrefabInstance: {fileID: 840973195}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &838146671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5838066765916956613, guid: 208dabd75813947f9818eb4ec5be41d7, type: 3}
@@ -8653,7 +8596,7 @@ GameObject:
   m_Component:
   - component: {fileID: 839018730}
   m_Layer: 0
-  m_Name: Train_standard
+  m_Name: TrainStandard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8745,7 +8688,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1659490491}
   m_SourcePrefab: {fileID: 100100000, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
 --- !u!4 &840973196 stripped
 Transform:
@@ -9351,7 +9297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 926262953}
   m_Layer: 0
-  m_Name: road_pillars
+  m_Name: RoadPillars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9775,7 +9721,7 @@ GameObject:
   - component: {fileID: 963194230}
   - component: {fileID: 963194231}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9892,11 +9838,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68b1a16a6d273413fa55e823b3387659, type: 3}
+  m_Script: {fileID: 11500000, guid: 807372a2f9b994b62b20bb98478e0df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   raycastDistance: 8
-  alphaTarget: 0.3
+  alphaTarget: 0.4
   radius: 0.8
   layerMask:
     serializedVersion: 2
@@ -10114,56 +10060,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6167805696161936606, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
   m_PrefabInstance: {fileID: 988788810}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &991317308
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 991317309}
-  - component: {fileID: 991317310}
-  m_Layer: 0
-  m_Name: PointB
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &991317309
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991317308}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 600}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1947560293}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &991317310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 991317308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83b21cd92934f4fc7a962100de075d30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardSpeed: 35
-  gameObjectTrain: {fileID: 326488866}
-  scopeDistance: 80
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1001 &994536265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11570,56 +11466,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5838066765916956613, guid: 208dabd75813947f9818eb4ec5be41d7, type: 3}
   m_PrefabInstance: {fileID: 307954216}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1160676083
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1160676084}
-  - component: {fileID: 1160676086}
-  m_Layer: 0
-  m_Name: PointA
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1160676084
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160676083}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 600}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1947560293}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1160676086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1160676083}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83b21cd92934f4fc7a962100de075d30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  forwardSpeed: 35
-  gameObjectTrain: {fileID: 1893053921}
-  scopeDistance: 110
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1001 &1174081864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12864,6 +12710,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2049214678666617181, guid: 528c84f50d22442b0b364a959142b843, type: 3}
   m_PrefabInstance: {fileID: 1293058612}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1293091047 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
+  m_PrefabInstance: {fileID: 326488864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1293091051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293091047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dc2ef38f1ab448e907937a65d7d253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardSpeed: 35
+  scopeDistance: 70
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &1296719188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12940,7 +12808,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1303809837}
   m_Layer: 0
-  m_Name: Train_cargo
+  m_Name: TrainCargo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14522,6 +14390,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2049214678666617181, guid: 528c84f50d22442b0b364a959142b843, type: 3}
   m_PrefabInstance: {fileID: 1467560301}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1467975419 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3599094169744525811, guid: c2efb001562594f73aea21800964bf52, type: 3}
+  m_PrefabInstance: {fileID: 1893053919}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1469414998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15339,7 +15212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1584204957}
   m_Layer: 0
-  m_Name: Train_cargo_3
+  m_Name: TrainCargo3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15957,7 +15830,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1645208848}
   m_Layer: 0
-  m_Name: train_sub
+  m_Name: TrainSub
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16389,6 +16262,28 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6167805696161936606, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
   m_PrefabInstance: {fileID: 1659010306}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1659490487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6167805696161936603, guid: c91d5acef62df4e70ba4a65e752a1415, type: 3}
+  m_PrefabInstance: {fileID: 840973195}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1659490491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659490487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dc2ef38f1ab448e907937a65d7d253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardSpeed: 35
+  scopeDistance: 110
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &1662876268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17125,7 +17020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1764621397}
   m_Layer: 0
-  m_Name: tunnel_m
+  m_Name: TunnelM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18376,18 +18271,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3599094169744525811, guid: c2efb001562594f73aea21800964bf52, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1893053924}
   m_SourcePrefab: {fileID: 100100000, guid: c2efb001562594f73aea21800964bf52, type: 3}
 --- !u!4 &1893053920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3599094169744525822, guid: c2efb001562594f73aea21800964bf52, type: 3}
   m_PrefabInstance: {fileID: 1893053919}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1893053921 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3599094169744525811, guid: c2efb001562594f73aea21800964bf52, type: 3}
-  m_PrefabInstance: {fileID: 1893053919}
+--- !u!114 &1893053924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1467975419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77dc2ef38f1ab448e907937a65d7d253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardSpeed: 35
+  scopeDistance: 110
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &1910454926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18789,7 +18699,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1943310459}
   m_Layer: 0
-  m_Name: Train_ramp
+  m_Name: TrainRamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18827,40 +18737,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5838066765916956613, guid: 208dabd75813947f9818eb4ec5be41d7, type: 3}
   m_PrefabInstance: {fileID: 383993760}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1947560292
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1947560293}
-  m_Layer: 0
-  m_Name: TrainController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1947560293
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1947560292}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1160676084}
-  - {fileID: 991317309}
-  - {fileID: 600811688}
-  m_Father: {fileID: 0}
-  m_RootOrder: 25
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1950653196
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19130,7 +19006,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1971332981}
   m_Layer: 0
-  m_Name: tunnel_l
+  m_Name: TunnelL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19620,7 +19496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2008052783}
   m_Layer: 0
-  m_Name: road_station_extended
+  m_Name: RoadStationExtended
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20202,7 +20078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2065701908}
   m_Layer: 0
-  m_Name: blocker_standard
+  m_Name: BlockerStandard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20463,7 +20339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2084034581}
   m_Layer: 0
-  m_Name: tunnel_s
+  m_Name: TunnelS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20588,7 +20464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2107010530}
   m_Layer: 0
-  m_Name: Train_cargo_5
+  m_Name: TrainCargo5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21140,6 +21016,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4281744248104867547, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
+      propertyPath: forwardSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6188452164009491363, guid: a6e66698f9a564bfbbcdc981aa25a496, type: 3}
       propertyPath: m_RootOrder
       value: 3

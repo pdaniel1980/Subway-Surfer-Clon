@@ -48,7 +48,7 @@ public class TransparentController : MonoBehaviour
         for (float t = 1f; t >= alphaTarget; t -= (Time.deltaTime / timeToTransparent))
         {
             obstacleMeshRenderer.material.SetFloat(Shader.PropertyToID("_Alpha"), t);
-            
+
             yield return null;
         }
     }

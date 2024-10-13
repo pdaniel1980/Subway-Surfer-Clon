@@ -1,7 +1,7 @@
 <h1>Subway Surfer Clon</h1>
 <h2>About the Project</h2>
 <h3>Subway Surfer Clone is a prototype of the famous game Subway Surfers. The goal is to apply advanced animations and 3D infinite running game mechanics.</h3>
-<p>This project was made in Unity 2022.2.3f1 LTS</p>
+<h3>This project was made in Unity 2022.2.3f1 LTS</h3>
 <h2><b>Animations</b></h2>
 <p>
   <u>
